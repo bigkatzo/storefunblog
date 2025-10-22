@@ -5,6 +5,42 @@ import { getPostBySlug } from '../lib/posts'
 
 // Extended blog post content
 const blogPostsContent: Record<string, string> = {
+  'merchant-guide': `
+# How to Become a Merchant in 3 Simple Steps
+
+Starting your journey as a merchant has never been easier! Whether you're looking to sell products online or establish a physical storefront, these three simple steps will guide you through the process.
+
+## Step 1: Choose Your Product or Service
+
+The first step in becoming a successful merchant is deciding what you want to sell. Consider your passions, expertise, and market demand.
+
+- Research your target market
+- Identify gaps in the market
+- Consider your unique value proposition
+- Start with products you're passionate about
+
+## Step 2: Set Up Your Business Infrastructure
+
+Once you've decided what to sell, it's time to establish the foundation of your business.
+
+- Register your business legally
+- Set up a merchant account for payments
+- Choose your sales channels (online, retail, or both)
+- Establish your brand identity
+
+## Step 3: Launch and Market Your Products
+
+With everything in place, it's time to go live and start attracting customers.
+
+- Create compelling product descriptions
+- Take high-quality product photos
+- Develop a marketing strategy
+- Engage with your customers and build relationships
+
+## Conclusion
+
+Becoming a merchant is an exciting journey that requires planning, dedication, and continuous learning. Start with these three steps and you'll be well on your way to building a successful business!
+  `,
   'getting-started-react-typescript': `
 # Introduction
 

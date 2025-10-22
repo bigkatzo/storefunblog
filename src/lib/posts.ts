@@ -6,6 +6,16 @@ import { BlogPost } from '../types/blog'
 
 export const blogPosts: BlogPost[] = [
   {
+    title: 'How to Become a Merchant in 3 Simple Steps',
+    excerpt: 'How to Become a Merchant in 3 Simple Steps',
+    date: 'Oct 22, 2025',
+    readTime: '3 min',
+    slug: 'merchant-guide',
+    image: '/uploads/2025-02-25 23.42.40.jpg',
+    tags: ['Guide', 'Business'],
+    author: 'Storesy Funson',
+  },
+  {
     title: 'Getting Started with React 18 and TypeScript',
     excerpt: 'Learn how to build modern web applications with React 18, TypeScript, and the latest tools in the ecosystem. Explore new features and best practices.',
     date: 'Oct 20, 2025',
