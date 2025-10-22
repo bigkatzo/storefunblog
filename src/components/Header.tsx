@@ -11,22 +11,18 @@ const Header = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center group">
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
-              className="flex items-center"
             >
               <img 
                 src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/logo.svg"
-                alt="StoreFun Logo"
-                className="h-10 w-10"
+                alt="StoreFun Blog"
+                className="h-12 w-auto"
                 style={{ filter: 'brightness(0)' }}
               />
             </motion.div>
-            <span className="text-2xl font-bold gradient-text">
-              StoreFun Blog
-            </span>
           </Link>
 
           {/* Desktop Navigation */}

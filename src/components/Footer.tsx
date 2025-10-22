@@ -17,14 +17,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
+            <div className="mb-4">
               <img 
                 src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/logo.svg"
-                alt="StoreFun Logo"
-                className="h-8 w-8"
+                alt="StoreFun Blog"
+                className="h-10 w-auto"
                 style={{ filter: 'brightness(0) invert(1)' }}
               />
-              <h3 className="text-white text-lg font-bold">StoreFun Blog</h3>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Exploring the latest trends in technology, design, and innovation. 
@@ -81,7 +80,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-          <p>© {currentYear} StoreFun Blog. All rights reserved.</p>
+          <p>© {currentYear} StoreFun. All rights reserved.</p>
         </div>
       </div>
     </footer>
