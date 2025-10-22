@@ -1,0 +1,17 @@
+fragment PostParts on Post {
+  __typename
+  title
+  excerpt
+  date
+  readTime
+  image
+  tags
+  author
+  body
+}
+
+fragment PageParts on Page {
+  __typename
+  title
+  body
+}
