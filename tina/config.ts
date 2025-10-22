@@ -14,6 +14,14 @@ export default defineConfig({
       publicFolder: 'public',
     },
   },
+  search: {
+    tina: {
+      indexerToken: '131bd66fe1c11d6c2f8128ffabc5a8e7ec05c724',
+      stopwordLanguages: ['eng'],
+    },
+    indexBatchSize: 100,
+    maxSearchIndexFieldLength: 100,
+  },
   schema: {
     collections: [
       {
