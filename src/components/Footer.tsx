@@ -17,7 +17,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About */}
           <div>
-            <h3 className="text-white text-lg font-bold mb-4">StoreFun Blog</h3>
+            <div className="flex items-center gap-2 mb-4">
+              <img 
+                src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/logo.svg"
+                alt="StoreFun Logo"
+                className="h-8 w-8"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              <h3 className="text-white text-lg font-bold">StoreFun Blog</h3>
+            </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Exploring the latest trends in technology, design, and innovation. 
               Join us on our journey to create amazing content.
