@@ -21,7 +21,7 @@ const Footer = () => {
               <img 
                 src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/logo.svg"
                 alt="StoreFun Blog"
-                className="h-10 w-auto"
+                className="h-8 w-auto"
                 style={{ filter: 'brightness(0) invert(1)' }}
               />
             </div>

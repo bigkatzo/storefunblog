@@ -19,7 +19,7 @@ const Header = () => {
               <img 
                 src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/logo.svg"
                 alt="StoreFun Blog"
-                className="h-12 w-auto"
+                className="h-10 w-auto"
                 style={{ filter: 'brightness(0)' }}
               />
             </motion.div>
