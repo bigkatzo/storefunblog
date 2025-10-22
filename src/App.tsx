@@ -1,0 +1,31 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Home from './pages/Home'
+import BlogPost from './pages/BlogPost'
+import About from './pages/About'
+
+function App() {
+  return (
+    <Router>
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-blue-50">
+        <Header />
+        <main className="flex-grow">
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/admin" element={<div className="p-8 text-center"><h1 className="text-2xl font-bold">TinaCMS Admin</h1><p className="mt-4">Run <code className="bg-gray-100 px-2 py-1 rounded">npm run tina</code> to access the CMS</p></div>} />
+            </Routes>
+          </AnimatePresence>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  )
+}
+
+export default App
+
