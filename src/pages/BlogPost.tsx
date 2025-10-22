@@ -135,16 +135,18 @@ const BlogPost = () => {
           transition={{ delay: 0.2 }}
         >
           {/* Tags */}
-          <div className="flex gap-2 mb-6">
-            {post.tags.map((tag: string, index: number) => (
-              <span
-                key={index}
-                className="text-sm font-medium px-4 py-1 bg-primary-100 text-primary-700 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          {post.tags && post.tags.length > 0 && (
+            <div className="flex gap-2 mb-6">
+              {post.tags.map((tag: string, index: number) => (
+                <span
+                  key={index}
+                  className="text-sm font-medium px-4 py-1 bg-primary-100 text-primary-700 rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
 
           {/* Title */}
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
