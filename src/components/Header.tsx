@@ -1,8 +1,20 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Lock scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -10,7 +22,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="w-full fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
+      <header className="w-full fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
         <nav className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img 
@@ -83,9 +95,9 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-black/50" onClick={() => setMobileMenuOpen(false)}>
+        <div className="md:hidden fixed inset-0 z-[45] bg-black/50" onClick={() => setMobileMenuOpen(false)}>
           <div 
-            className="fixed top-16 right-0 bottom-0 w-64 bg-white shadow-xl z-[55]"
+            className="fixed top-16 right-0 bottom-0 w-64 bg-white shadow-xl z-50"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col p-6 space-y-4">

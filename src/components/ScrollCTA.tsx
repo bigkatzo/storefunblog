@@ -58,7 +58,7 @@ export function ScrollCTA() {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -100, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed top-16 left-0 right-0 lg:left-64 z-40 bg-black text-white shadow-lg"
+          className="fixed top-16 left-0 right-0 lg:left-64 z-10 bg-black text-white shadow-lg"
         >
           <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
             {/* Logo + Text */}
