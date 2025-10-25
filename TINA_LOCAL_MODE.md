@@ -1,4 +1,10 @@
-# TinaCMS Local Mode Setup
+# TinaCMS Schema Sync Issue
+
+**Note:** The `--local` flag is not available in TinaCMS 2.9.0. See **FIX_TINA_ADMIN.md** for the actual solution.
+
+---
+
+# TinaCMS Local Mode Setup (DEPRECATED)
 
 ## 🚨 The Problem
 

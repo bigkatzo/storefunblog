@@ -9,8 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "tina:init": "tinacms init",
-    "tina:dev": "tinacms dev --local -c \"npm run dev\"",
-    "tina:build": "tinacms build --local"
+    "tina:dev": "tinacms dev -c \"npm run dev\"",
+    "tina:build": "tinacms build"
   },
   "dependencies": {
     "@tinacms/cli": "^1.11.0",
