@@ -96,12 +96,12 @@ const BlogPost = () => {
       </motion.div>
 
       {/* Content Section with Sidebar */}
-      <div className="relative">
+      <div className="lg:flex lg:gap-0">
         {/* Sidebar - Desktop Only - Positioned after hero */}
         <Sidebar />
         
         {/* Main Content */}
-        <div className="lg:ml-64">
+        <div className="lg:flex-1">
           <article className="max-w-4xl mx-auto px-4 pb-16">
         <motion.div
           initial={{ opacity: 0 }}
