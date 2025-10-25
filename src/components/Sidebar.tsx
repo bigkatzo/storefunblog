@@ -49,7 +49,7 @@ export function Sidebar() {
                 onClick={() => toggleCollection(collectionKey)}
                 className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
                   isCurrentCollection 
-                    ? 'bg-gray-800/50 text-white' 
+                    ? 'text-white' 
                     : 'text-gray-400 hover:bg-gray-800/30 hover:text-gray-300'
                 }`}
               >
@@ -74,7 +74,7 @@ export function Sidebar() {
                         onClick={closeMobileMenu}
                         className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
                           isCurrentPost
-                            ? 'bg-gray-700/40 text-gray-200'
+                            ? 'text-gray-200 cursor-default pointer-events-none'
                             : 'text-gray-500 hover:bg-gray-800/30 hover:text-gray-300'
                         }`}
                       >
