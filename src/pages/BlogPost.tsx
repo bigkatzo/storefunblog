@@ -95,12 +95,14 @@ const BlogPost = () => {
         </Link>
       </motion.div>
 
-      {/* Sidebar - Fixed to viewport */}
-      <Sidebar />
-      
-      {/* Content Section - With left margin for sidebar */}
-      <div className="lg:ml-64">
-        <article className="max-w-4xl mx-auto px-4 pb-16">
+      {/* Content Section with Sidebar - Starts after hero */}
+      <div className="lg:flex lg:items-start">
+        {/* Sidebar - Sticky within this container */}
+        <Sidebar />
+        
+        {/* Main Content */}
+        <div className="flex-1 min-w-0">
+          <article className="max-w-4xl mx-auto px-4 pb-16">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -219,6 +221,7 @@ const BlogPost = () => {
         </motion.div>
           </article>
         </div>
+      </div>
     </div>
   )
 }

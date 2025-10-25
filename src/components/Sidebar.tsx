@@ -24,7 +24,6 @@ export function Sidebar() {
   
   const [expandedCollection, setExpandedCollection] = useState<string>(currentCollection)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
 
   // Lock scroll when mobile menu is open
   useEffect(() => {
@@ -37,43 +36,6 @@ export function Sidebar() {
       document.body.style.overflow = ''
     }
   }, [mobileMenuOpen])
-
-  // Show/hide sidebar based on scroll position (only visible in content section)
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      
-      // Calculate hero section height
-      const getHeroHeight = () => {
-        if (window.innerWidth >= 768) return 384 // md: h-96
-        if (window.innerWidth >= 640) return 320 // sm: h-80
-        return 256 // default: h-64
-      }
-      
-      const heroHeight = getHeroHeight()
-      const headerHeight = 64 // h-16
-      
-      // Sidebar appears after hero image
-      const contentStartPosition = heroHeight - headerHeight + 100 // Small buffer
-      
-      // Calculate when to hide before footer
-      const documentHeight = document.documentElement.scrollHeight
-      const windowHeight = window.innerHeight
-      const footerStartPosition = documentHeight - windowHeight - 400 // Hide 400px before bottom
-      
-      // Show sidebar only in content section
-      setIsVisible(scrollY > contentStartPosition && scrollY < footerStartPosition)
-    }
-
-    handleScroll() // Initial check
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleScroll, { passive: true })
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleScroll)
-    }
-  }, [])
 
   const toggleCollection = (collection: string) => {
     setExpandedCollection(expandedCollection === collection ? '' : collection)
@@ -153,12 +115,8 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Desktop Sidebar - Fixed to viewport, visible only in content section */}
-      <aside 
-        className={`hidden lg:block fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl z-20 transition-opacity duration-300 ${
-          isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
+      {/* Desktop Sidebar - Sticky within content section */}
+      <aside className="hidden lg:block sticky top-16 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl z-20 flex-shrink-0">
         <SidebarContent />
       </aside>
 
