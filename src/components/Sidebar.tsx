@@ -94,18 +94,22 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:block fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 bg-gray-900 text-white overflow-y-auto border-r border-gray-800">
+      {/* Desktop Sidebar - Sticky positioned, starts at content */}
+      <aside className="hidden lg:block sticky top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 float-left">
         <SidebarContent />
       </aside>
 
-      {/* Mobile Menu Button */}
+      {/* Mobile Pull Tab */}
       <button
         onClick={() => setMobileMenuOpen(true)}
-        className="lg:hidden fixed bottom-6 right-6 z-40 bg-gray-900 text-white p-4 rounded-full shadow-2xl hover:bg-gray-800 transition-colors"
+        className="lg:hidden fixed bottom-0 left-1/2 -translate-x-1/2 z-40 bg-gray-900 text-white px-6 py-2 rounded-t-xl shadow-2xl hover:bg-gray-800 transition-all"
         aria-label="Open navigation menu"
       >
-        <Menu className="h-6 w-6" />
+        <div className="flex items-center gap-2">
+          <ChevronDown className="h-4 w-4 rotate-180" />
+          <span className="text-sm font-medium">Articles</span>
+          <ChevronDown className="h-4 w-4 rotate-180" />
+        </div>
       </button>
 
       {/* Mobile Drawer */}
