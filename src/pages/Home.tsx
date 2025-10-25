@@ -115,7 +115,7 @@ const Home = () => {
                   </h2>
                   <Link
                     to={`/${collection.name}`}
-                    className="text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1 group"
+                    className="text-gray-600 hover:text-gray-900 font-medium flex items-center gap-1 group"
                   >
                     View all
                     <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />

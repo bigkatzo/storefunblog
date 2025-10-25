@@ -1,6 +1,6 @@
 import { useParams, Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Calendar, Clock, ArrowLeft, Share2 } from 'lucide-react'
+import { Calendar, Clock, ChevronLeft, Share2 } from 'lucide-react'
 import { getPostBySlug } from '../lib/posts'
 
 const BlogPost = () => {
@@ -16,12 +16,30 @@ const BlogPost = () => {
   const post = fullSlug ? getPostBySlug(fullSlug) : null
   const content = post?.content || ''
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: post?.title,
+          text: post?.excerpt,
+          url: window.location.href,
+        })
+      } catch (err) {
+        console.log('Error sharing:', err)
+      }
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(window.location.href)
+      alert('Link copied to clipboard!')
+    }
+  }
+
   if (!post) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Post Not Found</h1>
-          <Link to="/" className="text-primary-600 hover:underline">
+          <Link to="/" className="text-gray-600 hover:underline">
             Return to Home
           </Link>
         </div>
@@ -31,15 +49,7 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Back Button */}
-      <div className="max-w-4xl mx-auto px-4 pt-8">
-        <Link to="/" className="inline-flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors">
-          <ArrowLeft className="h-4 w-4" />
-          Back to Home
-        </Link>
-      </div>
-
-      {/* Hero Section */}
+      {/* Hero Section with Back Button */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -51,6 +61,14 @@ const BlogPost = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        
+        {/* Back Button on Image */}
+        <Link 
+          to="/" 
+          className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all shadow-lg"
+        >
+          <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-gray-900" />
+        </Link>
       </motion.div>
 
       {/* Content */}
@@ -66,7 +84,7 @@ const BlogPost = () => {
               {post.tags.map((tag: string, index: number) => (
                 <span
                   key={index}
-                  className="text-sm font-medium px-4 py-1 bg-primary-100 text-primary-700 rounded-full"
+                  className="text-sm font-medium px-4 py-1 bg-gray-100 text-gray-700 rounded-full"
                 >
                   {tag}
                 </span>
@@ -91,9 +109,10 @@ const BlogPost = () => {
             </span>
             <span className="text-xs sm:text-base">By {post.author}</span>
             <motion.button
+              onClick={handleShare}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="ml-auto flex items-center gap-2 text-primary-600 hover:text-primary-700 min-h-[44px] min-w-[44px] justify-center sm:min-h-0 sm:min-w-0"
+              className="ml-auto flex items-center gap-2 text-gray-600 hover:text-gray-900 min-h-[44px] min-w-[44px] justify-center sm:min-h-0 sm:min-w-0"
             >
               <Share2 className="h-4 w-4 sm:h-5 sm:w-5" />
               <span className="hidden sm:inline">Share</span>
@@ -148,25 +167,27 @@ const BlogPost = () => {
           </div>
         </motion.div>
 
-        {/* Author Box */}
+        {/* About Store.fun Box */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 bg-gradient-to-r from-primary-50 to-blue-50 rounded-2xl p-8"
+          className="mt-12 bg-gray-50 rounded-2xl p-6 sm:p-8"
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">About the Author</h3>
-          <p className="text-gray-700 mb-4">
-            The StoreFun team is passionate about sharing knowledge and helping developers
-            build amazing applications. Follow us for more insights and tutorials.
+          <h3 className="text-2xl font-bold text-gray-900 mb-3">About Store.fun</h3>
+          <p className="text-gray-700 mb-6">
+            Store.fun is the decentralized end-to-end commerce platform empowering merchants to sell with full control and ownership.
           </p>
-          <motion.button
+          <motion.a
+            href="https://store.fun/about"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-primary-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors"
+            className="inline-block bg-gray-900 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors"
           >
-            Follow Us
-          </motion.button>
+            Learn More
+          </motion.a>
         </motion.div>
       </article>
     </div>

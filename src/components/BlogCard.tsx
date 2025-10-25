@@ -40,7 +40,7 @@ const BlogCard = ({ title, excerpt, slug, image, tags }: BlogCardProps) => {
               {tags.slice(0, 2).map((tag, index) => (
                 <span
                   key={index}
-                  className="text-xs font-medium px-3 py-1 bg-primary-100 text-primary-700 rounded-full"
+                  className="text-xs font-medium px-3 py-1 bg-gray-100 text-gray-700 rounded-full"
                 >
                   {tag}
                 </span>
@@ -49,7 +49,7 @@ const BlogCard = ({ title, excerpt, slug, image, tags }: BlogCardProps) => {
           )}
 
           {/* Title */}
-          <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors line-clamp-2">
+          <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-gray-700 transition-colors line-clamp-2">
             {title}
           </h3>
 
