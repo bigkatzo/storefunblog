@@ -41,7 +41,7 @@ const BlogCard = ({ title, excerpt, slug, image, tags, fromCollection }: BlogCar
         <div className="p-6">
           {/* Tags */}
           {tags && tags.length > 0 && (
-            <div className="flex gap-2 mb-3">
+            <div className="flex flex-wrap gap-2 mb-3">
               {tags.slice(0, 2).map((tag, index) => (
                 <span
                   key={index}

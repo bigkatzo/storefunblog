@@ -110,7 +110,7 @@ const BlogPost = () => {
         >
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
-            <div className="flex gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-6">
               {post.tags.map((tag: string, index: number) => (
                 <span
                   key={index}
