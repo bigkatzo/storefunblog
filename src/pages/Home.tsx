@@ -3,6 +3,7 @@ import { ArrowRight, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import BlogCard from '../components/BlogCard'
 import { getPostsByCollection } from '../lib/posts'
+import { SEO } from '../components/SEO'
 
 const collections = [
   { name: 'guides', label: 'Guides' },
@@ -16,6 +17,15 @@ const collections = [
 const Home = () => {
   return (
     <div className="min-h-screen">
+      {/* SEO Meta Tags */}
+      <SEO
+        title="Onchain Commerce is Here"
+        description="Everything you need to start your ecommerce business without middlemen and instant payments. The future of commerce is here."
+        image="https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-assets/og_image-1744669770840.png"
+        url={typeof window !== 'undefined' ? window.location.href : undefined}
+        type="website"
+      />
+      
       {/* Compact Hero Section - Black Background */}
       <section className="bg-black text-white py-16 px-4">
         <motion.div

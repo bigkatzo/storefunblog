@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Calendar, Clock, ChevronLeft, Share2 } from 'lucide-react'
 import { getPostBySlug } from '../lib/posts'
 import { Sidebar } from '../components/Sidebar'
+import { SEO } from '../components/SEO'
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -50,6 +51,18 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen">
+      {/* SEO Meta Tags */}
+      <SEO
+        title={post.title}
+        description={post.excerpt}
+        image={post.image}
+        url={typeof window !== 'undefined' ? window.location.href : undefined}
+        type="article"
+        author={post.author}
+        publishedTime={post.date}
+        tags={post.tags}
+      />
+      
       {/* Sidebar - Desktop Only */}
       <Sidebar />
       

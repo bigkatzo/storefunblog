@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 import BlogCard from '../components/BlogCard'
 import { getPostsByCollection } from '../lib/posts'
+import { SEO } from '../components/SEO'
 
 const collectionLabels: Record<string, string> = {
   'guides': 'Guides',
@@ -21,6 +22,15 @@ const CollectionPage = () => {
 
   return (
     <div className="min-h-screen">
+      {/* SEO Meta Tags */}
+      <SEO
+        title={title}
+        description={`Explore our collection of ${title.toLowerCase()} about onchain commerce and decentralized ecommerce platforms.`}
+        image="https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-assets/og_image-1744669770840.png"
+        url={typeof window !== 'undefined' ? window.location.href : undefined}
+        type="website"
+      />
+      
       {/* Hero Section - Same as Homepage */}
       <section className="bg-black text-white py-16 px-4">
         <motion.div
