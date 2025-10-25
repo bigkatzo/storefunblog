@@ -85,7 +85,7 @@ export function SEO({
       }
 
       // Article tags
-      tags.forEach((tag, index) => {
+      tags.forEach((tag) => {
         setMetaTag(`article:tag`, tag, true)
       })
     }

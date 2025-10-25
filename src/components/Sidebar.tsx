@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ChevronDown, ChevronRight, Menu, X } from 'lucide-react'
+import { ChevronDown, ChevronRight, X } from 'lucide-react'
 import { getPostsByCollection } from '../lib/posts'
 
 const collectionLabels: Record<string, string> = {
