@@ -117,7 +117,7 @@ const About = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-primary-600 px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow-lg text-sm sm:text-base min-h-[44px]"
+            className="bg-white text-gray-900 px-6 sm:px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors shadow-lg text-sm sm:text-base min-h-[44px]"
           >
             Subscribe to Newsletter
           </motion.button>
