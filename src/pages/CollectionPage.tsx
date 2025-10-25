@@ -34,16 +34,16 @@ const CollectionPage = () => {
       {/* Hero Section - Same as Homepage */}
       <section className="bg-black text-white py-16 px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="max-w-4xl mx-auto text-center"
         >
           {/* Logo */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.2 }}
             className="mb-8 flex justify-center"
           >
             <img 
@@ -56,9 +56,9 @@ const CollectionPage = () => {
 
           {/* Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, delay: 0.05 }}
             className="text-4xl md:text-5xl font-bold mb-4"
           >
             Onchain Commerce is Here
@@ -66,9 +66,9 @@ const CollectionPage = () => {
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, delay: 0.1 }}
             className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
           >
             Everything you need to start your business onchain without middlemen
@@ -76,9 +76,9 @@ const CollectionPage = () => {
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, delay: 0.15 }}
             className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
             <motion.a
@@ -111,9 +111,9 @@ const CollectionPage = () => {
         <div className="max-w-7xl mx-auto">
           {/* Collection Title */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
             className="mb-12 text-center"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
@@ -127,9 +127,9 @@ const CollectionPage = () => {
               {posts.map((post, index) => (
                 <motion.div
                   key={post.slug}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.2, delay: index * 0.03 }}
                 >
                   <BlogCard {...post} fromCollection={collection} />
                 </motion.div>
@@ -139,7 +139,7 @@ const CollectionPage = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
+              transition={{ duration: 0.2 }}
               className="text-center py-12"
             >
               <p className="text-xl text-gray-600">No articles found in this collection yet.</p>

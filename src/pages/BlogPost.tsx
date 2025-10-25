@@ -100,9 +100,9 @@ const BlogPost = () => {
         <div className="lg:ml-64">
           <article className="max-w-4xl mx-auto px-4 pb-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
         >
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
@@ -195,9 +195,9 @@ const BlogPost = () => {
 
         {/* About Store.fun Box */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
           className="mt-12 bg-gray-100 border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-3">About Store.fun</h3>

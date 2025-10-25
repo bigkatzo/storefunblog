@@ -29,16 +29,16 @@ const Home = () => {
       {/* Compact Hero Section - Black Background */}
       <section className="bg-black text-white py-16 px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
           className="max-w-4xl mx-auto text-center"
         >
           {/* Logo */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.2 }}
             className="mb-8 flex justify-center"
           >
             <img 
@@ -51,9 +51,9 @@ const Home = () => {
 
           {/* Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, delay: 0.05 }}
             className="text-4xl md:text-5xl font-bold mb-4"
           >
             Onchain Commerce is Here
@@ -61,9 +61,9 @@ const Home = () => {
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, delay: 0.1 }}
             className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
           >
             Everything you need to start your business onchain without middlemen
@@ -71,9 +71,9 @@ const Home = () => {
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, delay: 0.15 }}
             className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
             <motion.a
@@ -104,7 +104,7 @@ const Home = () => {
       {/* Collections Sections */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto space-y-16">
-          {collections.map((collection, collectionIndex) => {
+          {collections.map((collection) => {
             const posts = getPostsByCollection(collection.name)
             
             // Skip if no posts in this collection
@@ -113,10 +113,10 @@ const Home = () => {
             return (
               <motion.div
                 key={collection.name}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: collectionIndex * 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.3 }}
               >
                 {/* Collection Title */}
                 <div className="flex items-center justify-between mb-8">
@@ -139,10 +139,10 @@ const Home = () => {
                       {posts.slice(0, 6).map((post, index) => (
                         <motion.div
                           key={post.slug}
-                          initial={{ opacity: 0, x: 20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
                           viewport={{ once: true }}
-                          transition={{ delay: index * 0.1 }}
+                          transition={{ duration: 0.2, delay: index * 0.03 }}
                           className="w-[350px] flex-shrink-0"
                         >
                           <BlogCard {...post} />

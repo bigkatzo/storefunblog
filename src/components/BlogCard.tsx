@@ -20,10 +20,10 @@ const BlogCard = ({ title, excerpt, slug, image, tags, fromCollection }: BlogCar
       className="block"
     >
       <motion.article
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         whileHover={{ y: -8 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.2 }}
         className="bg-white rounded-xl shadow-lg overflow-hidden card-hover h-full cursor-pointer"
       >
         {/* Image */}
