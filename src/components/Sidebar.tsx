@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ChevronDown, ChevronRight, X } from 'lucide-react'
+import { ChevronDown, ChevronRight, X, Menu } from 'lucide-react'
 import { getPostsByCollection } from '../lib/posts'
 
 const collectionLabels: Record<string, string> = {
@@ -35,8 +35,6 @@ export function Sidebar() {
 
   const SidebarContent = () => (
     <div className="p-4">
-      <h2 className="text-lg font-bold mb-4 text-gray-300 uppercase tracking-wide">Categories</h2>
-      
       <nav className="space-y-1">
         {collectionOrder.map((collectionKey) => {
           const posts = getPostsByCollection(collectionKey)
@@ -46,25 +44,25 @@ export function Sidebar() {
           const isCurrentCollection = currentCollection === collectionKey
 
           return (
-            <div key={collectionKey} className="mb-2">
+            <div key={collectionKey} className="mb-1">
               <button
                 onClick={() => toggleCollection(collectionKey)}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-full transition-colors ${
                   isCurrentCollection 
-                    ? 'bg-gray-800 text-white' 
-                    : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                    ? 'bg-gray-800/50 text-white' 
+                    : 'text-gray-400 hover:bg-gray-800/30 hover:text-gray-300'
                 }`}
               >
-                <span className="font-medium text-sm">{collectionLabels[collectionKey]}</span>
+                <span className="text-sm">{collectionLabels[collectionKey]}</span>
                 {isExpanded ? (
-                  <ChevronDown className="h-4 w-4" />
+                  <ChevronDown className="h-3.5 w-3.5" />
                 ) : (
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-3.5 w-3.5" />
                 )}
               </button>
               
               {isExpanded && (
-                <div className="mt-1 space-y-1 pl-2">
+                <div className="mt-1 space-y-0.5 pl-2">
                   {posts.map((post) => {
                     const isCurrentPost = currentPath === `/${post.slug}`
                     
@@ -73,10 +71,10 @@ export function Sidebar() {
                         key={post.slug}
                         to={`/${post.slug}`}
                         onClick={closeMobileMenu}
-                        className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
+                        className={`block px-3 py-1.5 rounded-full text-xs transition-colors ${
                           isCurrentPost
-                            ? 'bg-gray-700 text-white font-medium'
-                            : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                            ? 'bg-gray-700/40 text-gray-200'
+                            : 'text-gray-500 hover:bg-gray-800/30 hover:text-gray-300'
                         }`}
                       >
                         <span className="line-clamp-2">{post.title}</span>
@@ -94,22 +92,18 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Desktop Sidebar - Sticky positioned, starts at content */}
-      <aside className="hidden lg:block sticky top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 float-left">
+      {/* Desktop Sidebar - Floating style */}
+      <aside className="hidden lg:block sticky top-20 left-4 w-64 h-[calc(100vh-6rem)] bg-gray-900 text-white overflow-y-auto rounded-2xl shadow-xl float-left ml-4">
         <SidebarContent />
       </aside>
 
-      {/* Mobile Pull Tab */}
+      {/* Mobile Floating Action Button */}
       <button
         onClick={() => setMobileMenuOpen(true)}
-        className="lg:hidden fixed bottom-0 left-1/2 -translate-x-1/2 z-40 bg-gray-900 text-white px-6 py-2 rounded-t-xl shadow-2xl hover:bg-gray-800 transition-all"
+        className="lg:hidden fixed bottom-6 right-6 z-40 bg-gray-900 text-white p-4 rounded-full shadow-2xl hover:bg-gray-800 transition-colors"
         aria-label="Open navigation menu"
       >
-        <div className="flex items-center gap-2">
-          <ChevronDown className="h-4 w-4 rotate-180" />
-          <span className="text-sm font-medium">Articles</span>
-          <ChevronDown className="h-4 w-4 rotate-180" />
-        </div>
+        <Menu className="h-6 w-6" />
       </button>
 
       {/* Mobile Drawer */}
@@ -123,8 +117,7 @@ export function Sidebar() {
           
           {/* Drawer */}
           <aside className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-900 text-white rounded-t-2xl shadow-2xl max-h-[80vh] overflow-y-auto animate-slide-up">
-            <div className="sticky top-0 bg-gray-900 border-b border-gray-800 p-4 flex justify-between items-center">
-              <h2 className="text-lg font-bold text-white">Navigation</h2>
+            <div className="sticky top-0 bg-gray-900 border-b border-gray-800 p-4 flex justify-end items-center">
               <button
                 onClick={closeMobileMenu}
                 className="p-2 hover:bg-gray-800 rounded-full transition-colors"
