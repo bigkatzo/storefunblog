@@ -106,12 +106,9 @@ const CollectionPage = () => {
             transition={{ delay: 0.2 }}
             className="mb-12 text-center"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
               {title}
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore our collection of {posts.length} {posts.length === 1 ? 'article' : 'articles'}
-            </p>
           </motion.div>
 
           {/* Articles Grid */}
