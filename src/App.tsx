@@ -6,7 +6,6 @@ import { CTASection } from './components/CTASection'
 import { ScrollToTop } from './components/ScrollToTop'
 import Home from './pages/Home'
 import BlogPost from './pages/BlogPost'
-import About from './pages/About'
 import CollectionPage from './pages/CollectionPage'
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
               
               {/* Collection category pages */}
               <Route path="/guides" element={<CollectionPage />} />
