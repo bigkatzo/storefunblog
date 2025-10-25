@@ -95,13 +95,13 @@ const BlogPost = () => {
         </Link>
       </motion.div>
 
-      {/* Content Section with Sidebar - Starts after hero */}
-      <div className="lg:flex lg:items-start">
-        {/* Sidebar - Sticky within this container */}
+      {/* Content Section with Sidebar */}
+      <div className="relative">
+        {/* Sidebar - Desktop Only - Positioned after hero */}
         <Sidebar />
         
         {/* Main Content */}
-        <div className="flex-1 min-w-0">
+        <div className="lg:ml-64">
           <article className="max-w-4xl mx-auto px-4 pb-16">
         <motion.div
           initial={{ opacity: 0 }}

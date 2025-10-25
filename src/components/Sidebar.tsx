@@ -64,8 +64,8 @@ export function Sidebar() {
             const isExpanded = expandedCollection === collectionKey
             const isCurrentCollection = currentCollection === collectionKey
 
-          return (
-            <div key={collectionKey} className="mb-2">
+            return (
+              <div key={collectionKey} className="mb-2">
               <button
                 onClick={() => toggleCollection(collectionKey)}
                 className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
@@ -115,8 +115,8 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Desktop Sidebar - Sticky within content section */}
-      <aside className="hidden lg:block sticky top-16 w-64 max-h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl z-20 flex-shrink-0 self-start">
+      {/* Desktop Sidebar - Pinned to left with rounded right corners */}
+      <aside className="hidden lg:block sticky top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl z-20 float-left">
         <SidebarContent />
       </aside>
 
