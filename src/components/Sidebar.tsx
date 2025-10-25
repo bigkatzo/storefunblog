@@ -44,25 +44,25 @@ export function Sidebar() {
           const isCurrentCollection = currentCollection === collectionKey
 
           return (
-            <div key={collectionKey} className="mb-1">
+            <div key={collectionKey} className="mb-2">
               <button
                 onClick={() => toggleCollection(collectionKey)}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-full transition-colors ${
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
                   isCurrentCollection 
                     ? 'bg-gray-800/50 text-white' 
                     : 'text-gray-400 hover:bg-gray-800/30 hover:text-gray-300'
                 }`}
               >
-                <span className="text-sm">{collectionLabels[collectionKey]}</span>
+                <span className="font-medium text-sm">{collectionLabels[collectionKey]}</span>
                 {isExpanded ? (
-                  <ChevronDown className="h-3.5 w-3.5" />
+                  <ChevronDown className="h-4 w-4" />
                 ) : (
-                  <ChevronRight className="h-3.5 w-3.5" />
+                  <ChevronRight className="h-4 w-4" />
                 )}
               </button>
               
               {isExpanded && (
-                <div className="mt-1 space-y-0.5 pl-2">
+                <div className="mt-1 space-y-1 pl-2">
                   {posts.map((post) => {
                     const isCurrentPost = currentPath === `/${post.slug}`
                     
@@ -72,7 +72,7 @@ export function Sidebar() {
                         to={`/${post.slug}`}
                         state={{ fromCollection: collectionKey }}
                         onClick={closeMobileMenu}
-                        className={`block px-3 py-1.5 rounded-full text-xs transition-colors ${
+                        className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
                           isCurrentPost
                             ? 'bg-gray-700/40 text-gray-200'
                             : 'text-gray-500 hover:bg-gray-800/30 hover:text-gray-300'
@@ -93,8 +93,8 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Desktop Sidebar - Floating style */}
-      <aside className="hidden lg:block sticky top-20 left-4 w-64 h-[calc(100vh-6rem)] bg-gray-900 text-white overflow-y-auto rounded-2xl shadow-xl float-left ml-4">
+      {/* Desktop Sidebar - Pinned to left with rounded right corners */}
+      <aside className="hidden lg:block sticky top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl float-left">
         <SidebarContent />
       </aside>
 
