@@ -1,6 +1,8 @@
 import { useParams, Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ChevronLeft, Share2 } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { getPostBySlug } from '../lib/posts'
 import { Sidebar } from '../components/Sidebar'
 import { SEO } from '../components/SEO'
@@ -150,50 +152,66 @@ const BlogPost = () => {
           </div>
 
           {/* Article Content */}
-          <div className="prose-custom">
-            {content.split('\n\n').map((paragraph: string, index: number) => {
-              // Simple markdown parsing
-              if (paragraph.startsWith('# ')) {
-                return (
-                  <h1 key={index} className="text-3xl font-bold mt-8 mb-4">
-                    {paragraph.replace('# ', '')}
-                  </h1>
-                )
-              }
-              if (paragraph.startsWith('## ')) {
-                return (
-                  <h2 key={index} className="text-2xl font-bold mt-6 mb-3">
-                    {paragraph.replace('## ', '')}
-                  </h2>
-                )
-              }
-              if (paragraph.startsWith('```')) {
-                return (
-                  <pre key={index} className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-4">
-                    <code>{paragraph.replace(/```\w*\n?|\n?```/g, '')}</code>
-                  </pre>
-                )
-              }
-              if (paragraph.match(/^\d+\./)) {
-                return (
-                  <li key={index} className="ml-6 mb-2">
-                    {paragraph.replace(/^\d+\.\s*/, '')}
-                  </li>
-                )
-              }
-              if (paragraph.startsWith('- ')) {
-                return (
-                  <li key={index} className="ml-6 mb-2">
-                    {paragraph.replace('- ', '')}
-                  </li>
-                )
-              }
-              return (
-                <p key={index} className="text-gray-700 leading-relaxed mb-4">
-                  {paragraph}
-                </p>
-              )
-            })}
+          <div className="prose prose-lg prose-gray max-w-none">
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: ({node, ...props}) => <h1 className="text-4xl font-bold mt-10 mb-6 text-gray-900 leading-tight" {...props} />,
+                h2: ({node, ...props}) => <h2 className="text-3xl font-bold mt-8 mb-4 text-gray-900 leading-tight" {...props} />,
+                h3: ({node, ...props}) => <h3 className="text-2xl font-bold mt-6 mb-3 text-gray-900 leading-snug" {...props} />,
+                h4: ({node, ...props}) => <h4 className="text-xl font-bold mt-5 mb-2 text-gray-900 leading-snug" {...props} />,
+                h5: ({node, ...props}) => <h5 className="text-lg font-bold mt-4 mb-2 text-gray-900" {...props} />,
+                h6: ({node, ...props}) => <h6 className="text-base font-bold mt-3 mb-2 text-gray-900" {...props} />,
+                p: ({node, ...props}) => <p className="text-gray-700 leading-relaxed mb-6 text-lg" {...props} />,
+                ul: ({node, ...props}) => <ul className="list-disc list-outside ml-6 mb-6 space-y-2 text-gray-700" {...props} />,
+                ol: ({node, ...props}) => <ol className="list-decimal list-outside ml-6 mb-6 space-y-2 text-gray-700" {...props} />,
+                li: ({node, ...props}) => <li className="text-gray-700 leading-relaxed pl-2" {...props} />,
+                blockquote: ({node, ...props}) => (
+                  <blockquote className="border-l-4 border-gray-900 bg-gray-50 pl-6 pr-4 py-4 my-6 italic text-gray-700" {...props} />
+                ),
+                code: ({node, className, children, ...props}) => {
+                  const inline = !className;
+                  return inline ? (
+                    <code className="bg-gray-100 text-gray-900 px-2 py-1 rounded text-sm font-mono" {...props}>
+                      {children}
+                    </code>
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                },
+                pre: ({node, ...props}) => (
+                  <pre className="bg-gray-900 text-gray-100 p-6 rounded-xl overflow-x-auto my-6 shadow-lg" {...props} />
+                ),
+                a: ({node, ...props}) => (
+                  <a className="text-gray-900 font-medium underline decoration-2 decoration-gray-300 hover:decoration-gray-900 transition-colors" {...props} />
+                ),
+                strong: ({node, ...props}) => <strong className="font-bold text-gray-900" {...props} />,
+                em: ({node, ...props}) => <em className="italic text-gray-700" {...props} />,
+                del: ({node, ...props}) => <del className="line-through text-gray-500" {...props} />,
+                hr: ({node, ...props}) => <hr className="my-8 border-t-2 border-gray-200" {...props} />,
+                table: ({node, ...props}) => (
+                  <div className="overflow-x-auto my-6">
+                    <table className="min-w-full border-collapse border border-gray-300" {...props} />
+                  </div>
+                ),
+                thead: ({node, ...props}) => <thead className="bg-gray-100" {...props} />,
+                tbody: ({node, ...props}) => <tbody className="divide-y divide-gray-200" {...props} />,
+                tr: ({node, ...props}) => <tr className="hover:bg-gray-50" {...props} />,
+                th: ({node, ...props}) => (
+                  <th className="px-6 py-3 text-left text-sm font-bold text-gray-900 border border-gray-300" {...props} />
+                ),
+                td: ({node, ...props}) => (
+                  <td className="px-6 py-3 text-sm text-gray-700 border border-gray-300" {...props} />
+                ),
+                img: ({node, ...props}) => (
+                  <img className="rounded-lg shadow-md my-6 w-full" {...props} />
+                ),
+              }}
+            >
+              {content}
+            </ReactMarkdown>
           </div>
         </motion.div>
 
