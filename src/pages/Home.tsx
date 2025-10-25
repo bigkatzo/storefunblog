@@ -32,9 +32,10 @@ const Home = () => {
             className="mb-8 flex justify-center"
           >
             <img 
-              src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/content/storefunlogo-funicon.svg"
-              alt="Store.fun Logo"
+              src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/content/storefunicon.svg"
+              alt="Store.fun Icon"
               className="h-16 w-auto"
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </motion.div>
 
@@ -55,7 +56,7 @@ const Home = () => {
             transition={{ delay: 0.3 }}
             className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
           >
-            Everything you need to know to start your business onchain without middlemen.
+            Everything you need to start your business onchain without middlemen
           </motion.p>
 
           {/* CTAs */}
@@ -63,7 +64,7 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
             <motion.a
               href="https://store.fun"
@@ -71,7 +72,7 @@ const Home = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-2.5 rounded-lg font-medium hover:bg-gray-100 transition-colors text-sm"
             >
               Launch a store
               <ArrowRight className="h-4 w-4" />
@@ -80,10 +81,9 @@ const Home = () => {
               href="mailto:contact@store.fun"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 bg-transparent text-white px-8 py-3 rounded-lg font-medium border-2 border-white hover:bg-white hover:text-black transition-colors"
+              className="inline-flex items-center justify-center bg-transparent text-white px-6 py-2.5 rounded-lg font-medium border-2 border-white hover:bg-white hover:text-black transition-colors text-sm"
             >
               Contact sales
-              <ChevronRight className="h-4 w-4" />
             </motion.a>
           </motion.div>
         </motion.div>
