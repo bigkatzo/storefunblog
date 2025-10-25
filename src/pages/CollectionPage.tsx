@@ -131,7 +131,7 @@ const CollectionPage = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                 >
-                  <BlogCard {...post} />
+                  <BlogCard {...post} fromCollection={collection} />
                 </motion.div>
               ))}
             </div>

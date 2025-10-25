@@ -9,11 +9,16 @@ interface BlogCardProps {
   slug: string
   image?: string
   tags?: string[]
+  fromCollection?: string // Optional: pass collection name if coming from a collection page
 }
 
-const BlogCard = ({ title, excerpt, slug, image, tags }: BlogCardProps) => {
+const BlogCard = ({ title, excerpt, slug, image, tags, fromCollection }: BlogCardProps) => {
   return (
-    <Link to={`/${slug}`} className="block">
+    <Link 
+      to={`/${slug}`} 
+      state={{ fromCollection }} 
+      className="block"
+    >
       <motion.article
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

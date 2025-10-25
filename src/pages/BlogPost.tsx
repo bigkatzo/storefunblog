@@ -17,6 +17,12 @@ const BlogPost = () => {
   const fullSlug = slug ? `${collection}/${slug}` : null
   const post = fullSlug ? getPostBySlug(fullSlug) : null
   const content = post?.content || ''
+  
+  // Check if user came from a collection page
+  const fromCollection = (location.state as { fromCollection?: string })?.fromCollection
+  
+  // Smart back button: go to collection page only if user came from there, otherwise go home
+  const backUrl = fromCollection ? `/${fromCollection}` : '/'
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -76,9 +82,9 @@ const BlogPost = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         
-        {/* Back Button on Image - Goes to collection page or home */}
+        {/* Back Button on Image - Smart navigation */}
         <Link 
-          to={collection ? `/${collection}` : "/"} 
+          to={backUrl}
           className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all shadow-lg"
         >
           <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-gray-900" />
