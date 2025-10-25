@@ -2,6 +2,7 @@ import { useParams, Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ChevronLeft, Share2 } from 'lucide-react'
 import { getPostBySlug } from '../lib/posts'
+import { Sidebar } from '../components/Sidebar'
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -49,30 +50,35 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Back Button */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="relative h-64 sm:h-80 md:h-96 mb-8 sm:mb-12"
-      >
-        <img
-          src={post.image}
-          alt={post.title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-        
-        {/* Back Button on Image */}
-        <Link 
-          to="/" 
-          className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all shadow-lg"
+      {/* Sidebar - Desktop Only */}
+      <Sidebar />
+      
+      {/* Main Content */}
+      <div className="lg:ml-64">
+        {/* Hero Section with Back Button */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="relative h-64 sm:h-80 md:h-96 mb-8 sm:mb-12"
         >
-          <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-gray-900" />
-        </Link>
-      </motion.div>
+          <img
+            src={post.image}
+            alt={post.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          
+          {/* Back Button on Image */}
+          <Link 
+            to="/" 
+            className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all shadow-lg"
+          >
+            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-gray-900" />
+          </Link>
+        </motion.div>
 
-      {/* Content */}
-      <article className="max-w-4xl mx-auto px-4 pb-16">
+        {/* Content */}
+        <article className="max-w-4xl mx-auto px-4 pb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -189,7 +195,8 @@ const BlogPost = () => {
             Learn More
           </motion.a>
         </motion.div>
-      </article>
+        </article>
+      </div>
     </div>
   )
 }
