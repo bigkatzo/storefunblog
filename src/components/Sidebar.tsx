@@ -33,15 +33,24 @@ export function Sidebar() {
     setMobileMenuOpen(false)
   }
 
-  const SidebarContent = () => (
-    <div className="p-4">
-      <nav className="space-y-1">
-        {collectionOrder.map((collectionKey) => {
-          const posts = getPostsByCollection(collectionKey)
-          if (posts.length === 0) return null
-          
-          const isExpanded = expandedCollection === collectionKey
-          const isCurrentCollection = currentCollection === collectionKey
+  const SidebarContent = () => {
+    // Reorder collections to show current collection at the top
+    const orderedCollections = currentCollection
+      ? [
+          currentCollection,
+          ...collectionOrder.filter(key => key !== currentCollection)
+        ]
+      : collectionOrder
+
+    return (
+      <div className="p-4">
+        <nav className="space-y-1">
+          {orderedCollections.map((collectionKey) => {
+            const posts = getPostsByCollection(collectionKey)
+            if (posts.length === 0) return null
+            
+            const isExpanded = expandedCollection === collectionKey
+            const isCurrentCollection = currentCollection === collectionKey
 
           return (
             <div key={collectionKey} className="mb-2">
@@ -89,7 +98,8 @@ export function Sidebar() {
         })}
       </nav>
     </div>
-  )
+    )
+  }
 
   return (
     <>
