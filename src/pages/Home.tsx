@@ -1,129 +1,153 @@
 import { motion } from 'framer-motion'
-import { Sparkles } from 'lucide-react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import BlogCard from '../components/BlogCard'
-import { getAllPosts } from '../lib/posts'
+import { getPostsByCollection } from '../lib/posts'
 
-const blogPosts = getAllPosts()
+const collections = [
+  { name: 'guides', label: 'Guides' },
+  { name: 'features', label: 'Features' },
+  { name: 'case-studies', label: 'Case Studies' },
+  { name: 'compare', label: 'Compare' },
+  { name: 'news', label: 'News' },
+  { name: 'blog', label: 'Blog' },
+]
 
 const Home = () => {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
+      {/* Compact Hero Section - Black Background */}
+      <section className="bg-black text-white py-16 px-4">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="max-w-4xl mx-auto text-center"
         >
+          {/* Logo */}
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-            className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-2 rounded-full mb-6"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="mb-8 flex justify-center"
           >
-            <Sparkles className="h-4 w-4" />
-            <span className="text-sm font-medium">Welcome to StoreFun Blog</span>
+            <img 
+              src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/content/storefunlogo-funicon.svg"
+              alt="Store.fun Logo"
+              className="h-16 w-auto"
+            />
           </motion.div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Discover Amazing{' '}
-            <span className="gradient-text">Stories</span>
-          </h1>
-
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Explore insightful articles about technology, design, and innovation. 
-            Learn from experts and stay ahead of the curve.
-          </p>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-primary-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors shadow-lg"
-            >
-              Explore Articles
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium border-2 border-primary-600 hover:bg-primary-50 transition-colors"
-            >
-              Subscribe Now
-            </motion.button>
-          </motion.div>
-        </motion.div>
-
-        {/* Background Decoration */}
-        <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob" />
-          <div className="absolute top-40 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000" />
-          <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000" />
-        </div>
-      </section>
-
-      {/* Blog Posts Grid */}
-      <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
+          {/* Title */}
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mb-12"
+            className="text-4xl md:text-5xl font-bold mb-4"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Latest Articles</h2>
-            <p className="text-gray-600">Stay updated with our newest posts and insights</p>
-          </motion.div>
+            Onchain Commerce is Here
+          </motion.h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <motion.div
-                key={post.slug}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <BlogCard {...post} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
+          >
+            Everything you need to know to start your business onchain without middlemen.
+          </motion.p>
 
-      {/* Newsletter Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-primary-600 to-blue-600">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center text-white"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Never Miss an Update
-          </h2>
-          <p className="text-lg mb-8 text-white/90">
-            Subscribe to our newsletter and get the latest articles delivered to your inbox
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-6 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-            />
-            <motion.button
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <motion.a
+              href="https://store.fun"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
             >
-              Subscribe
-            </motion.button>
-          </div>
+              Launch a store
+              <ArrowRight className="h-4 w-4" />
+            </motion.a>
+            <motion.a
+              href="mailto:contact@store.fun"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 bg-transparent text-white px-8 py-3 rounded-lg font-medium border-2 border-white hover:bg-white hover:text-black transition-colors"
+            >
+              Contact sales
+              <ChevronRight className="h-4 w-4" />
+            </motion.a>
+          </motion.div>
         </motion.div>
+      </section>
+
+      {/* Collections Sections */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto space-y-16">
+          {collections.map((collection, collectionIndex) => {
+            const posts = getPostsByCollection(collection.name)
+            
+            // Skip if no posts in this collection
+            if (posts.length === 0) return null
+
+            return (
+              <motion.div
+                key={collection.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: collectionIndex * 0.1 }}
+              >
+                {/* Collection Title */}
+                <div className="flex items-center justify-between mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900">
+                    {collection.label}
+                  </h2>
+                  <Link
+                    to={`/${collection.name}`}
+                    className="text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1 group"
+                  >
+                    View all
+                    <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+
+                {/* Horizontal Scrollable Articles */}
+                <div className="relative">
+                  <div className="overflow-x-auto pb-4 scrollbar-hide">
+                    <div className="flex gap-6" style={{ width: 'max-content' }}>
+                      {posts.slice(0, 6).map((post, index) => (
+                        <motion.div
+                          key={post.slug}
+                          initial={{ opacity: 0, x: 20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.1 }}
+                          className="w-[350px] flex-shrink-0"
+                        >
+                          <BlogCard {...post} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Gradient fade on the right */}
+                  {posts.length > 3 && (
+                    <div className="absolute top-0 right-0 h-full w-20 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+                  )}
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
       </section>
     </div>
   )

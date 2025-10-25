@@ -11,3 +11,7 @@ export const getPostBySlug = (slug: string): BlogPost | undefined => {
 export const getAllPosts = (): BlogPost[] => {
   return blogPosts
 }
+
+export const getPostsByCollection = (collection: string): BlogPost[] => {
+  return blogPosts.filter(post => post.slug.startsWith(`${collection}/`))
+}
