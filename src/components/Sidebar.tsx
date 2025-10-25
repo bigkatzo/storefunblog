@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ChevronDown, ChevronRight, Menu, X } from 'lucide-react'
-import { getAllPosts, getPostsByCollection } from '../lib/posts'
+import { getPostsByCollection } from '../lib/posts'
 
 const collectionLabels: Record<string, string> = {
   'guides': 'Guides',
