@@ -1,4 +1,4 @@
-# Store.fun Blog
+# store.fun
 
 The official blog for **Store.fun** - Commerce App for Creators on Solana.
 

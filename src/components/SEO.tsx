@@ -25,7 +25,7 @@ export function SEO({
 }: SEOProps) {
   useEffect(() => {
     // Set document title
-    document.title = `${title} | Store.fun Blog`
+    document.title = `${title} | store.fun`
 
     // Get or create meta tags
     const setMetaTag = (name: string, content: string, isProperty = false) => {
@@ -105,7 +105,7 @@ export function SEO({
 
     // Cleanup function to reset title on unmount
     return () => {
-      document.title = 'Store.fun Blog'
+      document.title = 'store.fun'
     }
   }, [title, description, image, url, type, author, publishedTime, modifiedTime, tags])
 
