@@ -11,7 +11,7 @@ function App() {
     <Router>
       <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-blue-50">
         <Header />
-        <main className="flex-grow">
+        <main className="flex-grow pt-16">
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Home />} />

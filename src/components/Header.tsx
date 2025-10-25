@@ -1,93 +1,123 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+  ]
 
   return (
-    <header className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center group">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              <img 
-                src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/logo.svg"
-                alt="StoreFun Blog"
-                className="h-10 w-auto"
-                style={{ filter: 'brightness(0)' }}
-              />
-            </motion.div>
+    <>
+      <header className="w-full fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
+        <nav className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center">
+            <img 
+              src="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/logo.svg" 
+              alt="store.fun" 
+              className="h-8 w-auto"
+              style={{ filter: 'brightness(0)' }}
+            />
           </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link
-              to="/"
-              className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="text-gray-700 hover:text-primary-600 font-medium transition-colors"
-            >
-              About
-            </Link>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-primary-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors shadow-md"
-            >
-              Subscribe
-            </motion.button>
+          
+          {/* Desktop Navigation Links */}
+          <div className="hidden md:flex items-center space-x-8 text-sm">
+            {navLinks.map((link, index) => (
+              <Link 
+                key={index}
+                to={link.href} 
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
+          
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Desktop: Show both buttons */}
+            <a 
+              href="https://my.store.fun/login" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hidden md:inline-block px-3 sm:px-6 py-2.5 font-medium text-sm text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              Sign In
+            </a>
+            <a 
+              href="https://my.store.fun/register" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hidden md:inline-block px-4 sm:px-6 py-2.5 rounded-full font-medium text-xs sm:text-sm text-white transition-all hover:scale-105" 
+              style={{ backgroundColor: '#0f47e4' }}
+            >
+              Launch Store
+            </a>
+            
+            {/* Mobile: Show Launch Store + Hamburger */}
+            <a 
+              href="https://my.store.fun/register" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="md:hidden px-4 py-2.5 rounded-full font-medium text-xs text-white transition-all hover:scale-105" 
+              style={{ backgroundColor: '#0f47e4' }}
+            >
+              Launch Store
+            </a>
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-gray-700 hover:text-gray-900 transition-colors"
+              aria-label="Menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
+        </nav>
+      </header>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-700 hover:text-primary-600"
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-40 bg-black/50" onClick={() => setMobileMenuOpen(false)}>
+          <div 
+            className="fixed top-16 right-0 bottom-0 w-64 bg-white shadow-xl"
+            onClick={(e) => e.stopPropagation()}
           >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden py-4 border-t"
-          >
-            <div className="flex flex-col gap-4">
-              <Link
-                to="/"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-gray-700 hover:text-primary-600 font-medium"
+            <div className="flex flex-col p-6 space-y-4">
+              {/* Navigation Links */}
+              <div className="flex flex-col space-y-3 pb-4 border-b border-gray-200">
+                {navLinks.map((link, index) => (
+                  <Link 
+                    key={index}
+                    to={link.href} 
+                    className="text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+              
+              {/* Sign In Button */}
+              <a 
+                href="https://my.store.fun/login" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-full px-4 py-3 text-center rounded-lg font-medium text-sm text-gray-700 hover:bg-gray-100 transition-colors border border-gray-300"
               >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-gray-700 hover:text-primary-600 font-medium"
-              >
-                About
-              </Link>
-              <button className="bg-primary-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors">
-                Subscribe
-              </button>
+                Sign In
+              </a>
             </div>
-          </motion.div>
-        )}
-      </nav>
-    </header>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 
