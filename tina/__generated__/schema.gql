@@ -54,14 +54,29 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  post(relativePath: String): Post!
-  postConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostFilter): PostConnection!
+  guide(relativePath: String): Guide!
+  guideConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GuideFilter): GuideConnection!
+  case_study(relativePath: String): Case_study!
+  case_studyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: Case_studyFilter): Case_studyConnection!
+  blog(relativePath: String): Blog!
+  blogConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: BlogFilter): BlogConnection!
+  feature(relativePath: String): Feature!
+  featureConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FeatureFilter): FeatureConnection!
+  compare(relativePath: String): Compare!
+  compareConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CompareFilter): CompareConnection!
+  news(relativePath: String): News!
+  newsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NewsFilter): NewsConnection!
   page(relativePath: String): Page!
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
 }
 
 input DocumentFilter {
-  post: PostFilter
+  guide: GuideFilter
+  case_study: Case_studyFilter
+  blog: BlogFilter
+  feature: FeatureFilter
+  compare: CompareFilter
+  news: NewsFilter
   page: PageFilter
 }
 
@@ -88,14 +103,17 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Post | Page | Folder
+union DocumentNode = Guide | Case_study | Blog | Feature | Compare | News | Page | Folder
 
-type Post implements Node & Document {
+type Guide implements Node & Document {
   title: String!
+  slug: String
+  published: Boolean
   excerpt: String!
   date: String!
   readTime: String!
   image: String
+  imageAlt: String
   tags: [String]
   author: String!
   body: JSON
@@ -109,6 +127,11 @@ input StringFilter {
   eq: String
   exists: Boolean
   in: [String]
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
 }
 
 input DatetimeFilter {
@@ -132,30 +155,302 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input PostFilter {
+input GuideFilter {
   title: StringFilter
+  slug: StringFilter
+  published: BooleanFilter
   excerpt: StringFilter
   date: DatetimeFilter
   readTime: StringFilter
   image: ImageFilter
+  imageAlt: StringFilter
   tags: StringFilter
   author: StringFilter
   body: RichTextFilter
 }
 
-type PostConnectionEdges {
+type GuideConnectionEdges {
   cursor: String!
-  node: Post
+  node: Guide
 }
 
-type PostConnection implements Connection {
+type GuideConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [PostConnectionEdges]
+  edges: [GuideConnectionEdges]
+}
+
+type Case_studyResults {
+  metric1: String
+  metric2: String
+  metric3: String
+}
+
+type Case_study implements Node & Document {
+  title: String!
+  slug: String
+  published: Boolean
+  excerpt: String!
+  company: String
+  industry: String
+  date: String!
+  readTime: String!
+  image: String
+  imageAlt: String
+  results: Case_studyResults
+  tags: [String]
+  author: String!
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input Case_studyResultsFilter {
+  metric1: StringFilter
+  metric2: StringFilter
+  metric3: StringFilter
+}
+
+input Case_studyFilter {
+  title: StringFilter
+  slug: StringFilter
+  published: BooleanFilter
+  excerpt: StringFilter
+  company: StringFilter
+  industry: StringFilter
+  date: DatetimeFilter
+  readTime: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+  results: Case_studyResultsFilter
+  tags: StringFilter
+  author: StringFilter
+  body: RichTextFilter
+}
+
+type Case_studyConnectionEdges {
+  cursor: String!
+  node: Case_study
+}
+
+type Case_studyConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [Case_studyConnectionEdges]
+}
+
+type Blog implements Node & Document {
+  title: String!
+  slug: String
+  published: Boolean
+  excerpt: String!
+  date: String!
+  readTime: String!
+  image: String
+  imageAlt: String
+  tags: [String]
+  category: String
+  author: String!
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input BlogFilter {
+  title: StringFilter
+  slug: StringFilter
+  published: BooleanFilter
+  excerpt: StringFilter
+  date: DatetimeFilter
+  readTime: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+  tags: StringFilter
+  category: StringFilter
+  author: StringFilter
+  body: RichTextFilter
+}
+
+type BlogConnectionEdges {
+  cursor: String!
+  node: Blog
+}
+
+type BlogConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [BlogConnectionEdges]
+}
+
+type Feature implements Node & Document {
+  title: String!
+  slug: String
+  published: Boolean
+  featured: Boolean
+  excerpt: String!
+  date: String
+  icon: String
+  image: String
+  imageAlt: String
+  category: String
+  tags: [String]
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input FeatureFilter {
+  title: StringFilter
+  slug: StringFilter
+  published: BooleanFilter
+  featured: BooleanFilter
+  excerpt: StringFilter
+  date: DatetimeFilter
+  icon: ImageFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+  category: StringFilter
+  tags: StringFilter
+  body: RichTextFilter
+}
+
+type FeatureConnectionEdges {
+  cursor: String!
+  node: Feature
+}
+
+type FeatureConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [FeatureConnectionEdges]
+}
+
+type CompareProduct1 {
+  name: String!
+  logo: String
+  url: String
+}
+
+type CompareProduct2 {
+  name: String!
+  logo: String
+  url: String
+}
+
+type Compare implements Node & Document {
+  title: String!
+  slug: String
+  published: Boolean
+  excerpt: String!
+  product1: CompareProduct1
+  product2: CompareProduct2
+  date: String!
+  readTime: String!
+  image: String
+  imageAlt: String
+  winner: String
+  tags: [String]
+  author: String!
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input CompareProduct1Filter {
+  name: StringFilter
+  logo: ImageFilter
+  url: StringFilter
+}
+
+input CompareProduct2Filter {
+  name: StringFilter
+  logo: ImageFilter
+  url: StringFilter
+}
+
+input CompareFilter {
+  title: StringFilter
+  slug: StringFilter
+  published: BooleanFilter
+  excerpt: StringFilter
+  product1: CompareProduct1Filter
+  product2: CompareProduct2Filter
+  date: DatetimeFilter
+  readTime: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+  winner: StringFilter
+  tags: StringFilter
+  author: StringFilter
+  body: RichTextFilter
+}
+
+type CompareConnectionEdges {
+  cursor: String!
+  node: Compare
+}
+
+type CompareConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [CompareConnectionEdges]
+}
+
+type News implements Node & Document {
+  title: String!
+  slug: String
+  published: Boolean
+  breaking: Boolean
+  excerpt: String!
+  date: String!
+  readTime: String!
+  image: String
+  imageAlt: String
+  source: String
+  tags: [String]
+  author: String!
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input NewsFilter {
+  title: StringFilter
+  slug: StringFilter
+  published: BooleanFilter
+  breaking: BooleanFilter
+  excerpt: StringFilter
+  date: DatetimeFilter
+  readTime: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+  source: StringFilter
+  tags: StringFilter
+  author: StringFilter
+  body: RichTextFilter
+}
+
+type NewsConnectionEdges {
+  cursor: String!
+  node: News
+}
+
+type NewsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [NewsConnectionEdges]
 }
 
 type Page implements Node & Document {
   title: String!
+  slug: String
+  published: Boolean
+  description: String
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -164,6 +459,9 @@ type Page implements Node & Document {
 
 input PageFilter {
   title: StringFilter
+  slug: StringFilter
+  published: BooleanFilter
+  description: StringFilter
   body: RichTextFilter
 }
 
@@ -184,29 +482,150 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
-  updatePost(relativePath: String!, params: PostMutation!): Post!
-  createPost(relativePath: String!, params: PostMutation!): Post!
+  updateGuide(relativePath: String!, params: GuideMutation!): Guide!
+  createGuide(relativePath: String!, params: GuideMutation!): Guide!
+  updateCase_study(relativePath: String!, params: Case_studyMutation!): Case_study!
+  createCase_study(relativePath: String!, params: Case_studyMutation!): Case_study!
+  updateBlog(relativePath: String!, params: BlogMutation!): Blog!
+  createBlog(relativePath: String!, params: BlogMutation!): Blog!
+  updateFeature(relativePath: String!, params: FeatureMutation!): Feature!
+  createFeature(relativePath: String!, params: FeatureMutation!): Feature!
+  updateCompare(relativePath: String!, params: CompareMutation!): Compare!
+  createCompare(relativePath: String!, params: CompareMutation!): Compare!
+  updateNews(relativePath: String!, params: NewsMutation!): News!
+  createNews(relativePath: String!, params: NewsMutation!): News!
   updatePage(relativePath: String!, params: PageMutation!): Page!
   createPage(relativePath: String!, params: PageMutation!): Page!
 }
 
 input DocumentUpdateMutation {
-  post: PostMutation
+  guide: GuideMutation
+  case_study: Case_studyMutation
+  blog: BlogMutation
+  feature: FeatureMutation
+  compare: CompareMutation
+  news: NewsMutation
   page: PageMutation
   relativePath: String
 }
 
 input DocumentMutation {
-  post: PostMutation
+  guide: GuideMutation
+  case_study: Case_studyMutation
+  blog: BlogMutation
+  feature: FeatureMutation
+  compare: CompareMutation
+  news: NewsMutation
   page: PageMutation
 }
 
-input PostMutation {
+input GuideMutation {
   title: String
+  slug: String
+  published: Boolean
   excerpt: String
   date: String
   readTime: String
   image: String
+  imageAlt: String
+  tags: [String]
+  author: String
+  body: JSON
+}
+
+input Case_studyResultsMutation {
+  metric1: String
+  metric2: String
+  metric3: String
+}
+
+input Case_studyMutation {
+  title: String
+  slug: String
+  published: Boolean
+  excerpt: String
+  company: String
+  industry: String
+  date: String
+  readTime: String
+  image: String
+  imageAlt: String
+  results: Case_studyResultsMutation
+  tags: [String]
+  author: String
+  body: JSON
+}
+
+input BlogMutation {
+  title: String
+  slug: String
+  published: Boolean
+  excerpt: String
+  date: String
+  readTime: String
+  image: String
+  imageAlt: String
+  tags: [String]
+  category: String
+  author: String
+  body: JSON
+}
+
+input FeatureMutation {
+  title: String
+  slug: String
+  published: Boolean
+  featured: Boolean
+  excerpt: String
+  date: String
+  icon: String
+  image: String
+  imageAlt: String
+  category: String
+  tags: [String]
+  body: JSON
+}
+
+input CompareProduct1Mutation {
+  name: String
+  logo: String
+  url: String
+}
+
+input CompareProduct2Mutation {
+  name: String
+  logo: String
+  url: String
+}
+
+input CompareMutation {
+  title: String
+  slug: String
+  published: Boolean
+  excerpt: String
+  product1: CompareProduct1Mutation
+  product2: CompareProduct2Mutation
+  date: String
+  readTime: String
+  image: String
+  imageAlt: String
+  winner: String
+  tags: [String]
+  author: String
+  body: JSON
+}
+
+input NewsMutation {
+  title: String
+  slug: String
+  published: Boolean
+  breaking: Boolean
+  excerpt: String
+  date: String
+  readTime: String
+  image: String
+  imageAlt: String
+  source: String
   tags: [String]
   author: String
   body: JSON
@@ -214,6 +633,9 @@ input PostMutation {
 
 input PageMutation {
   title: String
+  slug: String
+  published: Boolean
+  description: String
   body: JSON
 }
 

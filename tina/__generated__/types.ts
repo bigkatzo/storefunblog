@@ -82,8 +82,18 @@ export type Query = {
   collections: Array<Collection>;
   node: Node;
   document: DocumentNode;
-  post: Post;
-  postConnection: PostConnection;
+  guide: Guide;
+  guideConnection: GuideConnection;
+  case_study: Case_Study;
+  case_studyConnection: Case_StudyConnection;
+  blog: Blog;
+  blogConnection: BlogConnection;
+  feature: Feature;
+  featureConnection: FeatureConnection;
+  compare: Compare;
+  compareConnection: CompareConnection;
+  news: News;
+  newsConnection: NewsConnection;
   page: Page;
   pageConnection: PageConnection;
 };
@@ -110,18 +120,93 @@ export type QueryDocumentArgs = {
 };
 
 
-export type QueryPostArgs = {
+export type QueryGuideArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryPostConnectionArgs = {
+export type QueryGuideConnectionArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PostFilter>;
+  filter?: InputMaybe<GuideFilter>;
+};
+
+
+export type QueryCase_StudyArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCase_StudyConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Case_StudyFilter>;
+};
+
+
+export type QueryBlogArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryBlogConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<BlogFilter>;
+};
+
+
+export type QueryFeatureArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryFeatureConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FeatureFilter>;
+};
+
+
+export type QueryCompareArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCompareConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CompareFilter>;
+};
+
+
+export type QueryNewsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryNewsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<NewsFilter>;
 };
 
 
@@ -140,7 +225,12 @@ export type QueryPageConnectionArgs = {
 };
 
 export type DocumentFilter = {
-  post?: InputMaybe<PostFilter>;
+  guide?: InputMaybe<GuideFilter>;
+  case_study?: InputMaybe<Case_StudyFilter>;
+  blog?: InputMaybe<BlogFilter>;
+  feature?: InputMaybe<FeatureFilter>;
+  compare?: InputMaybe<CompareFilter>;
+  news?: InputMaybe<NewsFilter>;
   page?: InputMaybe<PageFilter>;
 };
 
@@ -181,15 +271,18 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Post | Page | Folder;
+export type DocumentNode = Guide | Case_Study | Blog | Feature | Compare | News | Page | Folder;
 
-export type Post = Node & Document & {
-  __typename?: 'Post';
+export type Guide = Node & Document & {
+  __typename?: 'Guide';
   title: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
+  published?: Maybe<Scalars['Boolean']['output']>;
   excerpt: Scalars['String']['output'];
   date: Scalars['String']['output'];
   readTime: Scalars['String']['output'];
   image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
   tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   author: Scalars['String']['output'];
   body?: Maybe<Scalars['JSON']['output']>;
@@ -203,6 +296,11 @@ export type StringFilter = {
   eq?: InputMaybe<Scalars['String']['input']>;
   exists?: InputMaybe<Scalars['Boolean']['input']>;
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type DatetimeFilter = {
@@ -226,33 +324,323 @@ export type RichTextFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type PostFilter = {
+export type GuideFilter = {
   title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  published?: InputMaybe<BooleanFilter>;
   excerpt?: InputMaybe<StringFilter>;
   date?: InputMaybe<DatetimeFilter>;
   readTime?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
   tags?: InputMaybe<StringFilter>;
   author?: InputMaybe<StringFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
-export type PostConnectionEdges = {
-  __typename?: 'PostConnectionEdges';
+export type GuideConnectionEdges = {
+  __typename?: 'GuideConnectionEdges';
   cursor: Scalars['String']['output'];
-  node?: Maybe<Post>;
+  node?: Maybe<Guide>;
 };
 
-export type PostConnection = Connection & {
-  __typename?: 'PostConnection';
+export type GuideConnection = Connection & {
+  __typename?: 'GuideConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<GuideConnectionEdges>>>;
+};
+
+export type Case_StudyResults = {
+  __typename?: 'Case_studyResults';
+  metric1?: Maybe<Scalars['String']['output']>;
+  metric2?: Maybe<Scalars['String']['output']>;
+  metric3?: Maybe<Scalars['String']['output']>;
+};
+
+export type Case_Study = Node & Document & {
+  __typename?: 'Case_study';
+  title: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
+  published?: Maybe<Scalars['Boolean']['output']>;
+  excerpt: Scalars['String']['output'];
+  company?: Maybe<Scalars['String']['output']>;
+  industry?: Maybe<Scalars['String']['output']>;
+  date: Scalars['String']['output'];
+  readTime: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  results?: Maybe<Case_StudyResults>;
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  author: Scalars['String']['output'];
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type Case_StudyResultsFilter = {
+  metric1?: InputMaybe<StringFilter>;
+  metric2?: InputMaybe<StringFilter>;
+  metric3?: InputMaybe<StringFilter>;
+};
+
+export type Case_StudyFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  published?: InputMaybe<BooleanFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  company?: InputMaybe<StringFilter>;
+  industry?: InputMaybe<StringFilter>;
+  date?: InputMaybe<DatetimeFilter>;
+  readTime?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  results?: InputMaybe<Case_StudyResultsFilter>;
+  tags?: InputMaybe<StringFilter>;
+  author?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type Case_StudyConnectionEdges = {
+  __typename?: 'Case_studyConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Case_Study>;
+};
+
+export type Case_StudyConnection = Connection & {
+  __typename?: 'Case_studyConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<Case_StudyConnectionEdges>>>;
+};
+
+export type Blog = Node & Document & {
+  __typename?: 'Blog';
+  title: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
+  published?: Maybe<Scalars['Boolean']['output']>;
+  excerpt: Scalars['String']['output'];
+  date: Scalars['String']['output'];
+  readTime: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  category?: Maybe<Scalars['String']['output']>;
+  author: Scalars['String']['output'];
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type BlogFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  published?: InputMaybe<BooleanFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  date?: InputMaybe<DatetimeFilter>;
+  readTime?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<StringFilter>;
+  category?: InputMaybe<StringFilter>;
+  author?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type BlogConnectionEdges = {
+  __typename?: 'BlogConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Blog>;
+};
+
+export type BlogConnection = Connection & {
+  __typename?: 'BlogConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<BlogConnectionEdges>>>;
+};
+
+export type Feature = Node & Document & {
+  __typename?: 'Feature';
+  title: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
+  published?: Maybe<Scalars['Boolean']['output']>;
+  featured?: Maybe<Scalars['Boolean']['output']>;
+  excerpt: Scalars['String']['output'];
+  date?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  category?: Maybe<Scalars['String']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type FeatureFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  published?: InputMaybe<BooleanFilter>;
+  featured?: InputMaybe<BooleanFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  date?: InputMaybe<DatetimeFilter>;
+  icon?: InputMaybe<ImageFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  category?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type FeatureConnectionEdges = {
+  __typename?: 'FeatureConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Feature>;
+};
+
+export type FeatureConnection = Connection & {
+  __typename?: 'FeatureConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<FeatureConnectionEdges>>>;
+};
+
+export type CompareProduct1 = {
+  __typename?: 'CompareProduct1';
+  name: Scalars['String']['output'];
+  logo?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type CompareProduct2 = {
+  __typename?: 'CompareProduct2';
+  name: Scalars['String']['output'];
+  logo?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+};
+
+export type Compare = Node & Document & {
+  __typename?: 'Compare';
+  title: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
+  published?: Maybe<Scalars['Boolean']['output']>;
+  excerpt: Scalars['String']['output'];
+  product1?: Maybe<CompareProduct1>;
+  product2?: Maybe<CompareProduct2>;
+  date: Scalars['String']['output'];
+  readTime: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  winner?: Maybe<Scalars['String']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  author: Scalars['String']['output'];
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type CompareProduct1Filter = {
+  name?: InputMaybe<StringFilter>;
+  logo?: InputMaybe<ImageFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type CompareProduct2Filter = {
+  name?: InputMaybe<StringFilter>;
+  logo?: InputMaybe<ImageFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type CompareFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  published?: InputMaybe<BooleanFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  product1?: InputMaybe<CompareProduct1Filter>;
+  product2?: InputMaybe<CompareProduct2Filter>;
+  date?: InputMaybe<DatetimeFilter>;
+  readTime?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  winner?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<StringFilter>;
+  author?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type CompareConnectionEdges = {
+  __typename?: 'CompareConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Compare>;
+};
+
+export type CompareConnection = Connection & {
+  __typename?: 'CompareConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<CompareConnectionEdges>>>;
+};
+
+export type News = Node & Document & {
+  __typename?: 'News';
+  title: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
+  published?: Maybe<Scalars['Boolean']['output']>;
+  breaking?: Maybe<Scalars['Boolean']['output']>;
+  excerpt: Scalars['String']['output'];
+  date: Scalars['String']['output'];
+  readTime: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  imageAlt?: Maybe<Scalars['String']['output']>;
+  source?: Maybe<Scalars['String']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  author: Scalars['String']['output'];
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type NewsFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  published?: InputMaybe<BooleanFilter>;
+  breaking?: InputMaybe<BooleanFilter>;
+  excerpt?: InputMaybe<StringFilter>;
+  date?: InputMaybe<DatetimeFilter>;
+  readTime?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  source?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<StringFilter>;
+  author?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type NewsConnectionEdges = {
+  __typename?: 'NewsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<News>;
+};
+
+export type NewsConnection = Connection & {
+  __typename?: 'NewsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<NewsConnectionEdges>>>;
 };
 
 export type Page = Node & Document & {
   __typename?: 'Page';
   title: Scalars['String']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
+  published?: Maybe<Scalars['Boolean']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -261,6 +649,9 @@ export type Page = Node & Document & {
 
 export type PageFilter = {
   title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  published?: InputMaybe<BooleanFilter>;
+  description?: InputMaybe<StringFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
@@ -284,8 +675,18 @@ export type Mutation = {
   deleteDocument: DocumentNode;
   createDocument: DocumentNode;
   createFolder: DocumentNode;
-  updatePost: Post;
-  createPost: Post;
+  updateGuide: Guide;
+  createGuide: Guide;
+  updateCase_study: Case_Study;
+  createCase_study: Case_Study;
+  updateBlog: Blog;
+  createBlog: Blog;
+  updateFeature: Feature;
+  createFeature: Feature;
+  updateCompare: Compare;
+  createCompare: Compare;
+  updateNews: News;
+  createNews: News;
   updatePage: Page;
   createPage: Page;
 };
@@ -324,15 +725,75 @@ export type MutationCreateFolderArgs = {
 };
 
 
-export type MutationUpdatePostArgs = {
+export type MutationUpdateGuideArgs = {
   relativePath: Scalars['String']['input'];
-  params: PostMutation;
+  params: GuideMutation;
 };
 
 
-export type MutationCreatePostArgs = {
+export type MutationCreateGuideArgs = {
   relativePath: Scalars['String']['input'];
-  params: PostMutation;
+  params: GuideMutation;
+};
+
+
+export type MutationUpdateCase_StudyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: Case_StudyMutation;
+};
+
+
+export type MutationCreateCase_StudyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: Case_StudyMutation;
+};
+
+
+export type MutationUpdateBlogArgs = {
+  relativePath: Scalars['String']['input'];
+  params: BlogMutation;
+};
+
+
+export type MutationCreateBlogArgs = {
+  relativePath: Scalars['String']['input'];
+  params: BlogMutation;
+};
+
+
+export type MutationUpdateFeatureArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FeatureMutation;
+};
+
+
+export type MutationCreateFeatureArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FeatureMutation;
+};
+
+
+export type MutationUpdateCompareArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CompareMutation;
+};
+
+
+export type MutationCreateCompareArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CompareMutation;
+};
+
+
+export type MutationUpdateNewsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: NewsMutation;
+};
+
+
+export type MutationCreateNewsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: NewsMutation;
 };
 
 
@@ -348,22 +809,133 @@ export type MutationCreatePageArgs = {
 };
 
 export type DocumentUpdateMutation = {
-  post?: InputMaybe<PostMutation>;
+  guide?: InputMaybe<GuideMutation>;
+  case_study?: InputMaybe<Case_StudyMutation>;
+  blog?: InputMaybe<BlogMutation>;
+  feature?: InputMaybe<FeatureMutation>;
+  compare?: InputMaybe<CompareMutation>;
+  news?: InputMaybe<NewsMutation>;
   page?: InputMaybe<PageMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
-  post?: InputMaybe<PostMutation>;
+  guide?: InputMaybe<GuideMutation>;
+  case_study?: InputMaybe<Case_StudyMutation>;
+  blog?: InputMaybe<BlogMutation>;
+  feature?: InputMaybe<FeatureMutation>;
+  compare?: InputMaybe<CompareMutation>;
+  news?: InputMaybe<NewsMutation>;
   page?: InputMaybe<PageMutation>;
 };
 
-export type PostMutation = {
+export type GuideMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
   excerpt?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['String']['input']>;
   readTime?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  author?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type Case_StudyResultsMutation = {
+  metric1?: InputMaybe<Scalars['String']['input']>;
+  metric2?: InputMaybe<Scalars['String']['input']>;
+  metric3?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Case_StudyMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  company?: InputMaybe<Scalars['String']['input']>;
+  industry?: InputMaybe<Scalars['String']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  readTime?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  results?: InputMaybe<Case_StudyResultsMutation>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  author?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type BlogMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  readTime?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  author?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type FeatureMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  featured?: InputMaybe<Scalars['Boolean']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type CompareProduct1Mutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  logo?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CompareProduct2Mutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  logo?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CompareMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  product1?: InputMaybe<CompareProduct1Mutation>;
+  product2?: InputMaybe<CompareProduct2Mutation>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  readTime?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  winner?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  author?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type NewsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  breaking?: InputMaybe<Scalars['Boolean']['input']>;
+  excerpt?: InputMaybe<Scalars['String']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  readTime?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  source?: InputMaybe<Scalars['String']['input']>;
   tags?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   author?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
@@ -371,38 +943,146 @@ export type PostMutation = {
 
 export type PageMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type PostPartsFragment = { __typename: 'Post', title: string, excerpt: string, date: string, readTime: string, image?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null };
+export type GuidePartsFragment = { __typename: 'Guide', title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, body?: any | null };
+export type Case_StudyPartsFragment = { __typename: 'Case_study', title: string, slug?: string | null, published?: boolean | null, excerpt: string, company?: string | null, industry?: string | null, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, results?: { __typename: 'Case_studyResults', metric1?: string | null, metric2?: string | null, metric3?: string | null } | null };
 
-export type PostQueryVariables = Exact<{
+export type BlogPartsFragment = { __typename: 'Blog', title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, category?: string | null, author: string, body?: any | null };
+
+export type FeaturePartsFragment = { __typename: 'Feature', title: string, slug?: string | null, published?: boolean | null, featured?: boolean | null, excerpt: string, date?: string | null, icon?: string | null, image?: string | null, imageAlt?: string | null, category?: string | null, tags?: Array<string | null> | null, body?: any | null };
+
+export type ComparePartsFragment = { __typename: 'Compare', title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, winner?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, product1?: { __typename: 'CompareProduct1', name: string, logo?: string | null, url?: string | null } | null, product2?: { __typename: 'CompareProduct2', name: string, logo?: string | null, url?: string | null } | null };
+
+export type NewsPartsFragment = { __typename: 'News', title: string, slug?: string | null, published?: boolean | null, breaking?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, source?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null };
+
+export type PagePartsFragment = { __typename: 'Page', title: string, slug?: string | null, published?: boolean | null, description?: string | null, body?: any | null };
+
+export type GuideQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PostQuery = { __typename?: 'Query', post: { __typename: 'Post', id: string, title: string, excerpt: string, date: string, readTime: string, image?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type GuideQuery = { __typename?: 'Query', guide: { __typename: 'Guide', id: string, title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
-export type PostConnectionQueryVariables = Exact<{
+export type GuideConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
   after?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Float']['input']>;
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PostFilter>;
+  filter?: InputMaybe<GuideFilter>;
 }>;
 
 
-export type PostConnectionQuery = { __typename?: 'Query', postConnection: { __typename?: 'PostConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostConnectionEdges', cursor: string, node?: { __typename: 'Post', id: string, title: string, excerpt: string, date: string, readTime: string, image?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type GuideConnectionQuery = { __typename?: 'Query', guideConnection: { __typename?: 'GuideConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GuideConnectionEdges', cursor: string, node?: { __typename: 'Guide', id: string, title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type Case_StudyQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type Case_StudyQuery = { __typename?: 'Query', case_study: { __typename: 'Case_study', id: string, title: string, slug?: string | null, published?: boolean | null, excerpt: string, company?: string | null, industry?: string | null, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, results?: { __typename: 'Case_studyResults', metric1?: string | null, metric2?: string | null, metric3?: string | null } | null } };
+
+export type Case_StudyConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Case_StudyFilter>;
+}>;
+
+
+export type Case_StudyConnectionQuery = { __typename?: 'Query', case_studyConnection: { __typename?: 'Case_studyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'Case_studyConnectionEdges', cursor: string, node?: { __typename: 'Case_study', id: string, title: string, slug?: string | null, published?: boolean | null, excerpt: string, company?: string | null, industry?: string | null, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, results?: { __typename: 'Case_studyResults', metric1?: string | null, metric2?: string | null, metric3?: string | null } | null } | null } | null> | null } };
+
+export type BlogQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type BlogQuery = { __typename?: 'Query', blog: { __typename: 'Blog', id: string, title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, category?: string | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type BlogConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<BlogFilter>;
+}>;
+
+
+export type BlogConnectionQuery = { __typename?: 'Query', blogConnection: { __typename?: 'BlogConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'BlogConnectionEdges', cursor: string, node?: { __typename: 'Blog', id: string, title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, category?: string | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type FeatureQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type FeatureQuery = { __typename?: 'Query', feature: { __typename: 'Feature', id: string, title: string, slug?: string | null, published?: boolean | null, featured?: boolean | null, excerpt: string, date?: string | null, icon?: string | null, image?: string | null, imageAlt?: string | null, category?: string | null, tags?: Array<string | null> | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type FeatureConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FeatureFilter>;
+}>;
+
+
+export type FeatureConnectionQuery = { __typename?: 'Query', featureConnection: { __typename?: 'FeatureConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FeatureConnectionEdges', cursor: string, node?: { __typename: 'Feature', id: string, title: string, slug?: string | null, published?: boolean | null, featured?: boolean | null, excerpt: string, date?: string | null, icon?: string | null, image?: string | null, imageAlt?: string | null, category?: string | null, tags?: Array<string | null> | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type CompareQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type CompareQuery = { __typename?: 'Query', compare: { __typename: 'Compare', id: string, title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, winner?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, product1?: { __typename: 'CompareProduct1', name: string, logo?: string | null, url?: string | null } | null, product2?: { __typename: 'CompareProduct2', name: string, logo?: string | null, url?: string | null } | null } };
+
+export type CompareConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CompareFilter>;
+}>;
+
+
+export type CompareConnectionQuery = { __typename?: 'Query', compareConnection: { __typename?: 'CompareConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CompareConnectionEdges', cursor: string, node?: { __typename: 'Compare', id: string, title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, winner?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, product1?: { __typename: 'CompareProduct1', name: string, logo?: string | null, url?: string | null } | null, product2?: { __typename: 'CompareProduct2', name: string, logo?: string | null, url?: string | null } | null } | null } | null> | null } };
+
+export type NewsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type NewsQuery = { __typename?: 'Query', news: { __typename: 'News', id: string, title: string, slug?: string | null, published?: boolean | null, breaking?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, source?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type NewsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<NewsFilter>;
+}>;
+
+
+export type NewsConnectionQuery = { __typename?: 'Query', newsConnection: { __typename?: 'NewsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NewsConnectionEdges', cursor: string, node?: { __typename: 'News', id: string, title: string, slug?: string | null, published?: boolean | null, breaking?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, source?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, slug?: string | null, published?: boolean | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -414,16 +1094,124 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, slug?: string | null, published?: boolean | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
-export const PostPartsFragmentDoc = gql`
-    fragment PostParts on Post {
+export const GuidePartsFragmentDoc = gql`
+    fragment GuideParts on Guide {
   __typename
   title
+  slug
+  published
   excerpt
   date
   readTime
   image
+  imageAlt
+  tags
+  author
+  body
+}
+    `;
+export const Case_StudyPartsFragmentDoc = gql`
+    fragment Case_studyParts on Case_study {
+  __typename
+  title
+  slug
+  published
+  excerpt
+  company
+  industry
+  date
+  readTime
+  image
+  imageAlt
+  results {
+    __typename
+    metric1
+    metric2
+    metric3
+  }
+  tags
+  author
+  body
+}
+    `;
+export const BlogPartsFragmentDoc = gql`
+    fragment BlogParts on Blog {
+  __typename
+  title
+  slug
+  published
+  excerpt
+  date
+  readTime
+  image
+  imageAlt
+  tags
+  category
+  author
+  body
+}
+    `;
+export const FeaturePartsFragmentDoc = gql`
+    fragment FeatureParts on Feature {
+  __typename
+  title
+  slug
+  published
+  featured
+  excerpt
+  date
+  icon
+  image
+  imageAlt
+  category
+  tags
+  body
+}
+    `;
+export const ComparePartsFragmentDoc = gql`
+    fragment CompareParts on Compare {
+  __typename
+  title
+  slug
+  published
+  excerpt
+  product1 {
+    __typename
+    name
+    logo
+    url
+  }
+  product2 {
+    __typename
+    name
+    logo
+    url
+  }
+  date
+  readTime
+  image
+  imageAlt
+  winner
+  tags
+  author
+  body
+}
+    `;
+export const NewsPartsFragmentDoc = gql`
+    fragment NewsParts on News {
+  __typename
+  title
+  slug
+  published
+  breaking
+  excerpt
+  date
+  readTime
+  image
+  imageAlt
+  source
   tags
   author
   body
@@ -433,12 +1221,15 @@ export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
   __typename
   title
+  slug
+  published
+  description
   body
 }
     `;
-export const PostDocument = gql`
-    query post($relativePath: String!) {
-  post(relativePath: $relativePath) {
+export const GuideDocument = gql`
+    query guide($relativePath: String!) {
+  guide(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -451,13 +1242,13 @@ export const PostDocument = gql`
       }
       id
     }
-    ...PostParts
+    ...GuideParts
   }
 }
-    ${PostPartsFragmentDoc}`;
-export const PostConnectionDocument = gql`
-    query postConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PostFilter) {
-  postConnection(
+    ${GuidePartsFragmentDoc}`;
+export const GuideConnectionDocument = gql`
+    query guideConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GuideFilter) {
+  guideConnection(
     before: $before
     after: $after
     first: $first
@@ -487,12 +1278,297 @@ export const PostConnectionDocument = gql`
           }
           id
         }
-        ...PostParts
+        ...GuideParts
       }
     }
   }
 }
-    ${PostPartsFragmentDoc}`;
+    ${GuidePartsFragmentDoc}`;
+export const Case_StudyDocument = gql`
+    query case_study($relativePath: String!) {
+  case_study(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...Case_studyParts
+  }
+}
+    ${Case_StudyPartsFragmentDoc}`;
+export const Case_StudyConnectionDocument = gql`
+    query case_studyConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: Case_studyFilter) {
+  case_studyConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...Case_studyParts
+      }
+    }
+  }
+}
+    ${Case_StudyPartsFragmentDoc}`;
+export const BlogDocument = gql`
+    query blog($relativePath: String!) {
+  blog(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...BlogParts
+  }
+}
+    ${BlogPartsFragmentDoc}`;
+export const BlogConnectionDocument = gql`
+    query blogConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: BlogFilter) {
+  blogConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...BlogParts
+      }
+    }
+  }
+}
+    ${BlogPartsFragmentDoc}`;
+export const FeatureDocument = gql`
+    query feature($relativePath: String!) {
+  feature(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...FeatureParts
+  }
+}
+    ${FeaturePartsFragmentDoc}`;
+export const FeatureConnectionDocument = gql`
+    query featureConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FeatureFilter) {
+  featureConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...FeatureParts
+      }
+    }
+  }
+}
+    ${FeaturePartsFragmentDoc}`;
+export const CompareDocument = gql`
+    query compare($relativePath: String!) {
+  compare(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CompareParts
+  }
+}
+    ${ComparePartsFragmentDoc}`;
+export const CompareConnectionDocument = gql`
+    query compareConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CompareFilter) {
+  compareConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CompareParts
+      }
+    }
+  }
+}
+    ${ComparePartsFragmentDoc}`;
+export const NewsDocument = gql`
+    query news($relativePath: String!) {
+  news(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...NewsParts
+  }
+}
+    ${NewsPartsFragmentDoc}`;
+export const NewsConnectionDocument = gql`
+    query newsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NewsFilter) {
+  newsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...NewsParts
+      }
+    }
+  }
+}
+    ${NewsPartsFragmentDoc}`;
 export const PageDocument = gql`
     query page($relativePath: String!) {
   page(relativePath: $relativePath) {
@@ -553,11 +1629,41 @@ export const PageConnectionDocument = gql`
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
-      post(variables: PostQueryVariables, options?: C): Promise<{data: PostQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostQueryVariables, query: string}> {
-        return requester<{data: PostQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostQueryVariables, query: string}, PostQueryVariables>(PostDocument, variables, options);
+      guide(variables: GuideQueryVariables, options?: C): Promise<{data: GuideQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuideQueryVariables, query: string}> {
+        return requester<{data: GuideQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuideQueryVariables, query: string}, GuideQueryVariables>(GuideDocument, variables, options);
       },
-    postConnection(variables?: PostConnectionQueryVariables, options?: C): Promise<{data: PostConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostConnectionQueryVariables, query: string}> {
-        return requester<{data: PostConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PostConnectionQueryVariables, query: string}, PostConnectionQueryVariables>(PostConnectionDocument, variables, options);
+    guideConnection(variables?: GuideConnectionQueryVariables, options?: C): Promise<{data: GuideConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuideConnectionQueryVariables, query: string}> {
+        return requester<{data: GuideConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GuideConnectionQueryVariables, query: string}, GuideConnectionQueryVariables>(GuideConnectionDocument, variables, options);
+      },
+    case_study(variables: Case_StudyQueryVariables, options?: C): Promise<{data: Case_StudyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Case_StudyQueryVariables, query: string}> {
+        return requester<{data: Case_StudyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Case_StudyQueryVariables, query: string}, Case_StudyQueryVariables>(Case_StudyDocument, variables, options);
+      },
+    case_studyConnection(variables?: Case_StudyConnectionQueryVariables, options?: C): Promise<{data: Case_StudyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Case_StudyConnectionQueryVariables, query: string}> {
+        return requester<{data: Case_StudyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Case_StudyConnectionQueryVariables, query: string}, Case_StudyConnectionQueryVariables>(Case_StudyConnectionDocument, variables, options);
+      },
+    blog(variables: BlogQueryVariables, options?: C): Promise<{data: BlogQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BlogQueryVariables, query: string}> {
+        return requester<{data: BlogQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BlogQueryVariables, query: string}, BlogQueryVariables>(BlogDocument, variables, options);
+      },
+    blogConnection(variables?: BlogConnectionQueryVariables, options?: C): Promise<{data: BlogConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BlogConnectionQueryVariables, query: string}> {
+        return requester<{data: BlogConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: BlogConnectionQueryVariables, query: string}, BlogConnectionQueryVariables>(BlogConnectionDocument, variables, options);
+      },
+    feature(variables: FeatureQueryVariables, options?: C): Promise<{data: FeatureQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FeatureQueryVariables, query: string}> {
+        return requester<{data: FeatureQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FeatureQueryVariables, query: string}, FeatureQueryVariables>(FeatureDocument, variables, options);
+      },
+    featureConnection(variables?: FeatureConnectionQueryVariables, options?: C): Promise<{data: FeatureConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FeatureConnectionQueryVariables, query: string}> {
+        return requester<{data: FeatureConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FeatureConnectionQueryVariables, query: string}, FeatureConnectionQueryVariables>(FeatureConnectionDocument, variables, options);
+      },
+    compare(variables: CompareQueryVariables, options?: C): Promise<{data: CompareQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CompareQueryVariables, query: string}> {
+        return requester<{data: CompareQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CompareQueryVariables, query: string}, CompareQueryVariables>(CompareDocument, variables, options);
+      },
+    compareConnection(variables?: CompareConnectionQueryVariables, options?: C): Promise<{data: CompareConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CompareConnectionQueryVariables, query: string}> {
+        return requester<{data: CompareConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CompareConnectionQueryVariables, query: string}, CompareConnectionQueryVariables>(CompareConnectionDocument, variables, options);
+      },
+    news(variables: NewsQueryVariables, options?: C): Promise<{data: NewsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NewsQueryVariables, query: string}> {
+        return requester<{data: NewsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NewsQueryVariables, query: string}, NewsQueryVariables>(NewsDocument, variables, options);
+      },
+    newsConnection(variables?: NewsConnectionQueryVariables, options?: C): Promise<{data: NewsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NewsConnectionQueryVariables, query: string}> {
+        return requester<{data: NewsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NewsConnectionQueryVariables, query: string}, NewsConnectionQueryVariables>(NewsConnectionDocument, variables, options);
       },
     page(variables: PageQueryVariables, options?: C): Promise<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}> {
         return requester<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}, PageQueryVariables>(PageDocument, variables, options);
@@ -612,7 +1718,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "http://localhost:4001/graphql",
+        url: "https://content.tinajs.io/1.6/content/7f8ccbe4-4107-4210-98e9-8b901365fdb0/github/main",
         queries,
       })
     )

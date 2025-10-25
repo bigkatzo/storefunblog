@@ -1,6 +1,8 @@
-# StoreFun Blog
+# Store.fun Blog
 
-A modern, performant blog application built with React 18, TypeScript, and TinaCMS.
+The official blog for **Store.fun** - Commerce App for Creators on Solana.
+
+A modern, performant content platform built with React 18, TypeScript, and TinaCMS, featuring guides, case studies, comparisons, and insights about building commerce on Solana.
 
 ## 🚀 Tech Stack
 
@@ -53,7 +55,7 @@ See [TINACMS_SETUP.md](./TINACMS_SETUP.md) for complete TinaCMS setup instructio
 ### Project Structure
 
 ```
-storefunblog/
+storefun-blog/
 ├── src/
 │   ├── components/     # Reusable components
 │   ├── pages/          # Page components
@@ -61,7 +63,13 @@ storefunblog/
 │   ├── main.tsx        # Entry point
 │   └── index.css       # Global styles
 ├── content/            # TinaCMS content
-│   └── posts/          # Blog posts
+│   ├── guides/         # How-to guides and tutorials
+│   ├── case-studies/   # Customer success stories
+│   ├── blog/           # General blog articles
+│   ├── features/       # Product features
+│   ├── compare/        # Product comparisons
+│   ├── news/           # News and announcements
+│   └── pages/          # Static pages
 ├── tina/               # TinaCMS configuration
 ├── public/             # Static assets
 └── index.html          # HTML template
@@ -69,36 +77,56 @@ storefunblog/
 
 ## 🎨 Features
 
-- ✨ Modern, responsive design
+- ✨ Modern, responsive design with Store.fun branding
 - 🚀 Lightning-fast performance with Vite
-- 📝 Content management with TinaCMS
+- 📝 Multi-collection content management with TinaCMS
 - 🎭 Smooth animations with Framer Motion
 - 🎯 Type-safe development with TypeScript
 - 📱 Mobile-first responsive design
 - 🌈 Utility-first styling with Tailwind CSS
+- 🔗 Clean URL structure: `/guides/`, `/case-studies/`, `/blog/`, etc.
+- 🎨 SEO-optimized with Open Graph and Twitter Cards
+- 🖼️ Custom favicons and app icons from Supabase CDN
 
 ## 🔧 Configuration
 
-### TinaCMS Setup (Optional)
+### Content Collections
 
-TinaCMS is installed but **not required**. Your blog works perfectly with MDX files!
+The blog has 6 specialized collections:
 
-**Option 1: Use Without TinaCMS (Recommended to start)**
-- Edit `.mdx` files in `content/posts/` directly
+1. **Guides** (`/guides/`) - How-to articles and tutorials
+2. **Case Studies** (`/case-studies/`) - Customer success stories with metrics
+3. **Blog** (`/blog/`) - General articles and insights
+4. **Features** (`/features/`) - Product features and capabilities
+5. **Comparisons** (`/compare/`) - Product comparison articles
+6. **News** (`/news/`) - Announcements and updates
+
+See [YOUR_COLLECTIONS.md](./YOUR_COLLECTIONS.md) for detailed collection documentation.
+
+### TinaCMS Setup
+
+1. Start TinaCMS:
+```bash
+npx tinacms dev --local
+```
+
+2. Access the admin panel at `/admin`
+3. Create and manage content through the visual editor
+
+**Or edit MDX files directly:**
+- Edit `.mdx` files in `content/` folders directly
 - No signup required, works out of the box
 
-**Option 2: Enable Visual Editing**
-1. Sign up at [tina.io](https://tina.io)
-2. Get your credentials
-3. Follow the [complete setup guide](./TINACMS_SETUP.md)
-4. Run `npm run tina:dev` to access visual editor
+See [MANAGING_COLLECTIONS.md](./MANAGING_COLLECTIONS.md) for collection management details.
 
 ### Customization
 
+- **Collections**: Edit `tina/config.ts` to add/modify collections
 - **Colors**: Edit `tailwind.config.js` to customize the color palette
 - **Fonts**: Update the Google Fonts import in `index.html`
 - **Components**: Modify components in `src/components/`
-- **Content**: Edit blog posts in `content/posts/`
+- **Content**: Edit MDX files in `content/` or use TinaCMS admin
+- **Branding**: Update icons and meta tags in `index.html`
 
 ## 📄 License
 

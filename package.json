@@ -1,6 +1,7 @@
 {
-  "name": "storefunblog",
+  "name": "storefun-blog",
   "version": "1.0.0",
+  "description": "Store.fun blog: Guides, case studies, and insights about building commerce on Solana",
   "type": "module",
   "scripts": {
     "dev": "vite",

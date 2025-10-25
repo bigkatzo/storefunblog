@@ -1,10 +1,113 @@
-fragment PostParts on Post {
+fragment GuideParts on Guide {
   __typename
   title
+  slug
+  published
   excerpt
   date
   readTime
   image
+  imageAlt
+  tags
+  author
+  body
+}
+
+fragment Case_studyParts on Case_study {
+  __typename
+  title
+  slug
+  published
+  excerpt
+  company
+  industry
+  date
+  readTime
+  image
+  imageAlt
+  results {
+    __typename
+    metric1
+    metric2
+    metric3
+  }
+  tags
+  author
+  body
+}
+
+fragment BlogParts on Blog {
+  __typename
+  title
+  slug
+  published
+  excerpt
+  date
+  readTime
+  image
+  imageAlt
+  tags
+  category
+  author
+  body
+}
+
+fragment FeatureParts on Feature {
+  __typename
+  title
+  slug
+  published
+  featured
+  excerpt
+  date
+  icon
+  image
+  imageAlt
+  category
+  tags
+  body
+}
+
+fragment CompareParts on Compare {
+  __typename
+  title
+  slug
+  published
+  excerpt
+  product1 {
+    __typename
+    name
+    logo
+    url
+  }
+  product2 {
+    __typename
+    name
+    logo
+    url
+  }
+  date
+  readTime
+  image
+  imageAlt
+  winner
+  tags
+  author
+  body
+}
+
+fragment NewsParts on News {
+  __typename
+  title
+  slug
+  published
+  breaking
+  excerpt
+  date
+  readTime
+  image
+  imageAlt
+  source
   tags
   author
   body
@@ -13,5 +116,8 @@ fragment PostParts on Post {
 fragment PageParts on Page {
   __typename
   title
+  slug
+  published
+  description
   body
 }

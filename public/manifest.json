@@ -1,0 +1,28 @@
+{
+  "name": "Store.fun: Commerce App for Creators on Solana",
+  "short_name": "store.fun",
+  "description": "Discover guides, case studies, and insights about building commerce on Solana",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-assets/favicon-1744848001132.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-assets/apple_touch_icon-1744830035487.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "shopping"],
+  "screenshots": [],
+  "shortcuts": []
+}
+
