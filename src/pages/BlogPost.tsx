@@ -198,7 +198,7 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 bg-gray-50 rounded-2xl p-6 sm:p-8"
+          className="mt-12 bg-gray-100 border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm"
         >
           <h3 className="text-2xl font-bold text-gray-900 mb-3">About Store.fun</h3>
           <p className="text-gray-700 mb-6">
