@@ -4,6 +4,7 @@ import { Calendar, Clock, ChevronLeft, Share2 } from 'lucide-react'
 import { getPostBySlug } from '../lib/posts'
 import { Sidebar } from '../components/Sidebar'
 import { SEO } from '../components/SEO'
+import { ScrollCTA } from '../components/ScrollCTA'
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -68,6 +69,9 @@ const BlogPost = () => {
         publishedTime={post.date}
         tags={post.tags}
       />
+      
+      {/* Scroll CTA Banner */}
+      <ScrollCTA />
       
       {/* Hero Section with Back Button - Full Width */}
       <motion.div
