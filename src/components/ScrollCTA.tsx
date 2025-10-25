@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react'
 export function ScrollCTA() {
   const [isVisible, setIsVisible] = useState(false)
   const [lastScrollY, setLastScrollY] = useState(0)
-  const [hasScrolledDown, setHasScrolledDown] = useState(false)
+  const [hasScrolledInArticle, setHasScrolledInArticle] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,16 +21,22 @@ export function ScrollCTA() {
       
       const imageHeight = getImageHeight()
       const headerHeight = 64 // Header is h-16 (64px)
-      const minScrollForBanner = imageHeight + headerHeight + 50 // Add 50px buffer
+      const articleStartPosition = imageHeight + headerHeight
       
-      // Only show after user has scrolled past the featured image
-      if (currentScrollY > minScrollForBanner) {
-        setHasScrolledDown(true)
+      // Check if user has scrolled into the article body area (past featured image)
+      const inArticleBody = currentScrollY > articleStartPosition
+      
+      // Track if user has engaged with article content
+      if (inArticleBody && currentScrollY > articleStartPosition + 200) {
+        setHasScrolledInArticle(true)
       }
       
-      // Show when scrolling up (after passing image), hide when scrolling down
-      if (hasScrolledDown) {
-        if (currentScrollY < lastScrollY && currentScrollY > minScrollForBanner) {
+      // Only show banner when:
+      // 1. User is in article body area
+      // 2. User has scrolled down at least 200px into the article
+      // 3. User is scrolling UP (looking for navigation)
+      if (hasScrolledInArticle && inArticleBody) {
+        if (currentScrollY < lastScrollY && currentScrollY > articleStartPosition + 100) {
           setIsVisible(true)
         } else {
           setIsVisible(false)
@@ -42,7 +48,7 @@ export function ScrollCTA() {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY, hasScrolledDown])
+  }, [lastScrollY, hasScrolledInArticle])
 
   return (
     <AnimatePresence>
