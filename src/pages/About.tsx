@@ -32,12 +32,12 @@ const About = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 px-4">
             About <span className="gradient-text">StoreFun Blog</span>
           </h1>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed px-4">
             We're on a mission to share knowledge, inspire creativity, and 
             build a community of passionate developers and designers.
           </p>
@@ -108,16 +108,16 @@ const About = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-gradient-to-r from-primary-600 to-blue-600 rounded-2xl shadow-xl p-8 md:p-12 text-center text-white"
+          className="bg-gradient-to-r from-primary-600 to-blue-600 rounded-2xl shadow-xl p-6 sm:p-8 md:p-12 text-center text-white"
         >
-          <h2 className="text-3xl font-bold mb-4">Join Our Journey</h2>
-          <p className="text-lg mb-8 text-white/90">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Join Our Journey</h2>
+          <p className="text-base sm:text-lg mb-6 sm:mb-8 text-white/90">
             Be part of our growing community and never miss an update
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow-lg"
+            className="bg-white text-primary-600 px-6 sm:px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow-lg text-sm sm:text-base min-h-[44px]"
           >
             Subscribe to Newsletter
           </motion.button>

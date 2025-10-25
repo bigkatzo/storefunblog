@@ -43,7 +43,7 @@ const BlogPost = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="relative h-96 mb-12"
+        className="relative h-64 sm:h-80 md:h-96 mb-8 sm:mb-12"
       >
         <img
           src={post.image}
@@ -75,28 +75,28 @@ const BlogPost = () => {
           )}
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
             {post.title}
           </h1>
 
           {/* Meta Info */}
-          <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-8 pb-8 border-b">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b">
             <span className="flex items-center gap-2">
-              <Calendar className="h-5 w-5" />
-              {post.date}
+              <Calendar className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+              <span className="text-xs sm:text-base">{post.date}</span>
             </span>
             <span className="flex items-center gap-2">
-              <Clock className="h-5 w-5" />
-              {post.readTime}
+              <Clock className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+              <span className="text-xs sm:text-base">{post.readTime}</span>
             </span>
-            <span>By {post.author}</span>
+            <span className="text-xs sm:text-base">By {post.author}</span>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="ml-auto flex items-center gap-2 text-primary-600 hover:text-primary-700"
+              className="ml-auto flex items-center gap-2 text-primary-600 hover:text-primary-700 min-h-[44px] min-w-[44px] justify-center sm:min-h-0 sm:min-w-0"
             >
-              <Share2 className="h-5 w-5" />
-              Share
+              <Share2 className="h-4 w-4 sm:h-5 sm:w-5" />
+              <span className="hidden sm:inline">Share</span>
             </motion.button>
           </div>
 

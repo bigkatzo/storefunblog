@@ -59,23 +59,23 @@ const BlogCard = ({ title, excerpt, date, readTime, slug, image, tags }: BlogCar
         <p className="text-gray-600 mb-4 line-clamp-3">{excerpt}</p>
 
         {/* Meta Info */}
-        <div className="flex items-center justify-between text-sm text-gray-500">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm text-gray-500">
+          <div className="flex items-center gap-3 sm:gap-4">
             <span className="flex items-center gap-1">
-              <Calendar className="h-4 w-4" />
-              {date}
+              <Calendar className="h-4 w-4 flex-shrink-0" />
+              <span className="text-xs sm:text-sm">{date}</span>
             </span>
             <span className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
-              {readTime}
+              <Clock className="h-4 w-4 flex-shrink-0" />
+              <span className="text-xs sm:text-sm">{readTime}</span>
             </span>
           </div>
 
           <Link
             to={`/${slug}`}
-            className="flex items-center gap-1 text-primary-600 font-medium hover:gap-2 transition-all"
+            className="flex items-center gap-1 text-primary-600 font-medium hover:gap-2 transition-all self-start sm:self-auto"
           >
-            Read More
+            <span className="text-sm">Read More</span>
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
