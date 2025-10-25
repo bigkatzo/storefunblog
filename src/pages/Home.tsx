@@ -21,7 +21,7 @@ const Home = () => {
       <SEO
         title="Onchain Commerce is Here"
         description="Everything you need to start your ecommerce business without middlemen and instant payments. The future of commerce is here."
-        image="https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-assets/og_image-1744669770840.png"
+        image="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/content/og-home.png"
         url={typeof window !== 'undefined' ? window.location.href : undefined}
         type="website"
       />

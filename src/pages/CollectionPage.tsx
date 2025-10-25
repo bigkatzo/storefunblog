@@ -26,7 +26,7 @@ const CollectionPage = () => {
       <SEO
         title={title}
         description={`Explore our collection of ${title.toLowerCase()} about onchain commerce and decentralized ecommerce platforms.`}
-        image="https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-assets/og_image-1744669770840.png"
+        image={`https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/content/og-${collection}.png`}
         url={typeof window !== 'undefined' ? window.location.href : undefined}
         type="website"
       />

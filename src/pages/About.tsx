@@ -32,7 +32,7 @@ const About = () => {
       <SEO
         title="About"
         description="Learn about Store.fun Blog - your source for insights on onchain commerce, decentralized ecommerce, and the future of online business."
-        image="https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-assets/og_image-1744669770840.png"
+        image="https://sakysysfksculqobozxi.supabase.co/storage/v1/object/public/site-assets/content/og-about.png"
         url={typeof window !== 'undefined' ? window.location.href : undefined}
         type="website"
       />
