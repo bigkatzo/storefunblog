@@ -35,10 +35,22 @@ export function ScrollCTA() {
       // 1. User is in article body area
       // 2. User has scrolled down at least 200px into the article
       // 3. User is scrolling UP (looking for navigation)
-      if (hasScrolledInArticle && inArticleBody) {
-        if (currentScrollY < lastScrollY && currentScrollY > articleStartPosition + 100) {
+      // 4. User is well past the hero section (buffer zone)
+      const bufferZone = 150 // Extra buffer to ensure we're clear of hero
+      const minimumScrollForDisplay = articleStartPosition + bufferZone
+      
+      // Hide immediately if we're too close to hero or scrolling back toward it
+      if (currentScrollY <= minimumScrollForDisplay) {
+        setIsVisible(false)
+        if (currentScrollY <= articleStartPosition) {
+          setHasScrolledInArticle(false) // Reset if back at hero
+        }
+      } else if (hasScrolledInArticle && inArticleBody) {
+        // Only show when scrolling UP and well into article content
+        if (currentScrollY < lastScrollY && currentScrollY > minimumScrollForDisplay) {
           setIsVisible(true)
-        } else {
+        } else if (currentScrollY >= lastScrollY) {
+          // Hide when scrolling down
           setIsVisible(false)
         }
       }
