@@ -83,9 +83,9 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-[60] bg-black/50" onClick={() => setMobileMenuOpen(false)}>
+        <div className="md:hidden fixed inset-0 z-[65] bg-black/50" onClick={() => setMobileMenuOpen(false)}>
           <div 
-            className="fixed top-16 right-0 bottom-0 w-64 bg-white shadow-xl z-[61]"
+            className="fixed top-16 right-0 bottom-0 w-64 bg-white shadow-xl z-[70]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col p-6 space-y-4">
