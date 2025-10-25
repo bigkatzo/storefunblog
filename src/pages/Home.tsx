@@ -67,7 +67,7 @@ const Home = () => {
             className="flex flex-col sm:flex-row gap-3 justify-center items-center"
           >
             <motion.a
-              href="https://store.fun"
+              href="https://store.fun/start"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -78,7 +78,9 @@ const Home = () => {
               <ArrowRight className="h-4 w-4" />
             </motion.a>
             <motion.a
-              href="mailto:contact@store.fun"
+              href="https://t.me/storedotfun"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center justify-center gap-2 bg-transparent text-white px-6 py-2.5 rounded-lg font-medium border-2 border-white hover:bg-white hover:text-black transition-colors text-sm w-full sm:w-auto sm:min-w-[180px]"
