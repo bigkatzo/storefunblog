@@ -76,9 +76,9 @@ const BlogPost = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         
-        {/* Back Button on Image */}
+        {/* Back Button on Image - Goes to collection page or home */}
         <Link 
-          to="/" 
+          to={collection ? `/${collection}` : "/"} 
           className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-white/90 hover:bg-white backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all shadow-lg"
         >
           <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-gray-900" />
