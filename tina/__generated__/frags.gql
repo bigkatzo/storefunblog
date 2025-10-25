@@ -112,12 +112,3 @@ fragment NewsParts on News {
   author
   body
 }
-
-fragment PageParts on Page {
-  __typename
-  title
-  slug
-  published
-  description
-  body
-}

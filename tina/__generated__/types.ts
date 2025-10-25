@@ -94,8 +94,6 @@ export type Query = {
   compareConnection: CompareConnection;
   news: News;
   newsConnection: NewsConnection;
-  page: Page;
-  pageConnection: PageConnection;
 };
 
 
@@ -209,21 +207,6 @@ export type QueryNewsConnectionArgs = {
   filter?: InputMaybe<NewsFilter>;
 };
 
-
-export type QueryPageArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryPageConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PageFilter>;
-};
-
 export type DocumentFilter = {
   guide?: InputMaybe<GuideFilter>;
   case_study?: InputMaybe<Case_StudyFilter>;
@@ -231,7 +214,6 @@ export type DocumentFilter = {
   feature?: InputMaybe<FeatureFilter>;
   compare?: InputMaybe<CompareFilter>;
   news?: InputMaybe<NewsFilter>;
-  page?: InputMaybe<PageFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -271,7 +253,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Guide | Case_Study | Blog | Feature | Compare | News | Page | Folder;
+export type DocumentNode = Guide | Case_Study | Blog | Feature | Compare | News | Folder;
 
 export type Guide = Node & Document & {
   __typename?: 'Guide';
@@ -635,39 +617,6 @@ export type NewsConnection = Connection & {
   edges?: Maybe<Array<Maybe<NewsConnectionEdges>>>;
 };
 
-export type Page = Node & Document & {
-  __typename?: 'Page';
-  title: Scalars['String']['output'];
-  slug?: Maybe<Scalars['String']['output']>;
-  published?: Maybe<Scalars['Boolean']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  body?: Maybe<Scalars['JSON']['output']>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type PageFilter = {
-  title?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<StringFilter>;
-  published?: InputMaybe<BooleanFilter>;
-  description?: InputMaybe<StringFilter>;
-  body?: InputMaybe<RichTextFilter>;
-};
-
-export type PageConnectionEdges = {
-  __typename?: 'PageConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<Page>;
-};
-
-export type PageConnection = Connection & {
-  __typename?: 'PageConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -687,8 +636,6 @@ export type Mutation = {
   createCompare: Compare;
   updateNews: News;
   createNews: News;
-  updatePage: Page;
-  createPage: Page;
 };
 
 
@@ -796,18 +743,6 @@ export type MutationCreateNewsArgs = {
   params: NewsMutation;
 };
 
-
-export type MutationUpdatePageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: PageMutation;
-};
-
-
-export type MutationCreatePageArgs = {
-  relativePath: Scalars['String']['input'];
-  params: PageMutation;
-};
-
 export type DocumentUpdateMutation = {
   guide?: InputMaybe<GuideMutation>;
   case_study?: InputMaybe<Case_StudyMutation>;
@@ -815,7 +750,6 @@ export type DocumentUpdateMutation = {
   feature?: InputMaybe<FeatureMutation>;
   compare?: InputMaybe<CompareMutation>;
   news?: InputMaybe<NewsMutation>;
-  page?: InputMaybe<PageMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -826,7 +760,6 @@ export type DocumentMutation = {
   feature?: InputMaybe<FeatureMutation>;
   compare?: InputMaybe<CompareMutation>;
   news?: InputMaybe<NewsMutation>;
-  page?: InputMaybe<PageMutation>;
 };
 
 export type GuideMutation = {
@@ -941,14 +874,6 @@ export type NewsMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type PageMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-  published?: InputMaybe<Scalars['Boolean']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  body?: InputMaybe<Scalars['JSON']['input']>;
-};
-
 export type GuidePartsFragment = { __typename: 'Guide', title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null };
 
 export type Case_StudyPartsFragment = { __typename: 'Case_study', title: string, slug?: string | null, published?: boolean | null, excerpt: string, company?: string | null, industry?: string | null, date: string, readTime: string, image?: string | null, imageAlt?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, results?: { __typename: 'Case_studyResults', metric1?: string | null, metric2?: string | null, metric3?: string | null } | null };
@@ -960,8 +885,6 @@ export type FeaturePartsFragment = { __typename: 'Feature', title: string, slug?
 export type ComparePartsFragment = { __typename: 'Compare', title: string, slug?: string | null, published?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, winner?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, product1?: { __typename: 'CompareProduct1', name: string, logo?: string | null, url?: string | null } | null, product2?: { __typename: 'CompareProduct2', name: string, logo?: string | null, url?: string | null } | null };
 
 export type NewsPartsFragment = { __typename: 'News', title: string, slug?: string | null, published?: boolean | null, breaking?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, source?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null };
-
-export type PagePartsFragment = { __typename: 'Page', title: string, slug?: string | null, published?: boolean | null, description?: string | null, body?: any | null };
 
 export type GuideQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1076,25 +999,6 @@ export type NewsConnectionQueryVariables = Exact<{
 
 
 export type NewsConnectionQuery = { __typename?: 'Query', newsConnection: { __typename?: 'NewsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NewsConnectionEdges', cursor: string, node?: { __typename: 'News', id: string, title: string, slug?: string | null, published?: boolean | null, breaking?: boolean | null, excerpt: string, date: string, readTime: string, image?: string | null, imageAlt?: string | null, source?: string | null, tags?: Array<string | null> | null, author: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
-
-export type PageQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, slug?: string | null, published?: boolean | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
-
-export type PageConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PageFilter>;
-}>;
-
-
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, slug?: string | null, published?: boolean | null, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const GuidePartsFragmentDoc = gql`
     fragment GuideParts on Guide {
@@ -1214,16 +1118,6 @@ export const NewsPartsFragmentDoc = gql`
   source
   tags
   author
-  body
-}
-    `;
-export const PagePartsFragmentDoc = gql`
-    fragment PageParts on Page {
-  __typename
-  title
-  slug
-  published
-  description
   body
 }
     `;
@@ -1569,63 +1463,6 @@ export const NewsConnectionDocument = gql`
   }
 }
     ${NewsPartsFragmentDoc}`;
-export const PageDocument = gql`
-    query page($relativePath: String!) {
-  page(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...PageParts
-  }
-}
-    ${PagePartsFragmentDoc}`;
-export const PageConnectionDocument = gql`
-    query pageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PageFilter) {
-  pageConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...PageParts
-      }
-    }
-  }
-}
-    ${PagePartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -1664,12 +1501,6 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     newsConnection(variables?: NewsConnectionQueryVariables, options?: C): Promise<{data: NewsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NewsConnectionQueryVariables, query: string}> {
         return requester<{data: NewsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NewsConnectionQueryVariables, query: string}, NewsConnectionQueryVariables>(NewsConnectionDocument, variables, options);
-      },
-    page(variables: PageQueryVariables, options?: C): Promise<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}> {
-        return requester<{data: PageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageQueryVariables, query: string}, PageQueryVariables>(PageDocument, variables, options);
-      },
-    pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}> {
-        return requester<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
       }
     };
   }

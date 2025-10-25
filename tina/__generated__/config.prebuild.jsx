@@ -811,66 +811,6 @@ var config_default = defineConfig({
             isBody: true
           }
         ]
-      },
-      // Pages Collection (for static pages like About, Contact, etc.)
-      {
-        name: "page",
-        label: "Pages",
-        path: "content/pages",
-        format: "mdx",
-        ui: {
-          router: ({ document }) => {
-            return `/${document._sys.filename}`;
-          },
-          allowedActions: {
-            create: true,
-            delete: true
-          }
-        },
-        defaultItem: () => {
-          return {
-            title: "New Page",
-            published: false
-          };
-        },
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Title",
-            description: "The title of the page",
-            isTitle: true,
-            required: true
-          },
-          {
-            type: "string",
-            name: "slug",
-            label: "Slug",
-            description: "URL path for this page"
-          },
-          {
-            type: "boolean",
-            name: "published",
-            label: "Published",
-            description: "Toggle to publish or unpublish this page"
-          },
-          {
-            type: "string",
-            name: "description",
-            label: "Meta Description",
-            description: "SEO description for this page",
-            ui: {
-              component: "textarea"
-            }
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            description: "The main content of your page",
-            isBody: true
-          }
-        ]
       }
     ]
   }
