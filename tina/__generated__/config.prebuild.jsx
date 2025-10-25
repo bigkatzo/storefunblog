@@ -22,15 +22,6 @@ var config_default = defineConfig({
     indexBatchSize: 100,
     maxSearchIndexFieldLength: 100
   },
-  // Admin configuration
-  admin: {
-    auth: {
-      // Use TinaCMS Cloud authentication
-      useLocalAuth: false
-    }
-  },
-  // Content API configuration for auto-commits
-  contentApiUrlOverride: "/api/gql",
   schema: {
     collections: [
       // Guides Collection
