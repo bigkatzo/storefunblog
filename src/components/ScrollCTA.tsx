@@ -11,14 +11,26 @@ export function ScrollCTA() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       
-      // Only show after user has scrolled down at least 300px
-      if (currentScrollY > 300) {
+      // Calculate featured image height (matches BlogPost hero section)
+      // Mobile: h-64 (256px), sm: h-80 (320px), md: h-96 (384px)
+      const getImageHeight = () => {
+        if (window.innerWidth >= 768) return 384 // md and up
+        if (window.innerWidth >= 640) return 320 // sm
+        return 256 // default
+      }
+      
+      const imageHeight = getImageHeight()
+      const headerHeight = 64 // Header is h-16 (64px)
+      const minScrollForBanner = imageHeight + headerHeight + 50 // Add 50px buffer
+      
+      // Only show after user has scrolled past the featured image
+      if (currentScrollY > minScrollForBanner) {
         setHasScrolledDown(true)
       }
       
-      // Show when scrolling up, hide when scrolling down
+      // Show when scrolling up (after passing image), hide when scrolling down
       if (hasScrolledDown) {
-        if (currentScrollY < lastScrollY && currentScrollY > 200) {
+        if (currentScrollY < lastScrollY && currentScrollY > minScrollForBanner) {
           setIsVisible(true)
         } else {
           setIsVisible(false)
