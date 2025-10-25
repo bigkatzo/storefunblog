@@ -2,6 +2,8 @@
 
 The official blog for **Store.fun** - Commerce App for Creators on Solana.
 
+Everything you need to start your ecommerce business without middlemen and instant payments. The future of commerce is here.
+
 A modern, performant content platform built with React 18, TypeScript, and TinaCMS, featuring guides, case studies, comparisons, and insights about building commerce on Solana.
 
 ## 🚀 Tech Stack

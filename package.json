@@ -1,7 +1,7 @@
 {
   "name": "storefun-blog",
   "version": "1.0.0",
-  "description": "Store.fun blog: Guides, case studies, and insights about building commerce on Solana",
+  "description": "Everything you need to start your ecommerce business without middlemen and instant payments. The future of commerce is here.",
   "type": "module",
   "scripts": {
     "dev": "vite",
