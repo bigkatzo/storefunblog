@@ -49,7 +49,7 @@ const BlogCard = ({ title, excerpt, date, readTime, slug, image, tags }: BlogCar
         )}
 
         {/* Title */}
-        <Link to={`/blog/${slug}`}>
+        <Link to={`/${slug}`}>
           <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-primary-600 transition-colors line-clamp-2">
             {title}
           </h3>
@@ -72,7 +72,7 @@ const BlogCard = ({ title, excerpt, date, readTime, slug, image, tags }: BlogCar
           </div>
 
           <Link
-            to={`/blog/${slug}`}
+            to={`/${slug}`}
             className="flex items-center gap-1 text-primary-600 font-medium hover:gap-2 transition-all"
           >
             Read More

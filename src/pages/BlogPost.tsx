@@ -1,11 +1,19 @@
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, ArrowLeft, Share2 } from 'lucide-react'
 import { getPostBySlug } from '../lib/posts'
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>()
-  const post = slug ? getPostBySlug(slug) : null
+  const location = useLocation()
+  
+  // Extract collection from the path (e.g., /guides/my-post -> guides)
+  const pathParts = location.pathname.split('/').filter(Boolean)
+  const collection = pathParts[0] || ''
+  
+  // Build full slug with collection (e.g., "guides/my-post")
+  const fullSlug = slug ? `${collection}/${slug}` : null
+  const post = fullSlug ? getPostBySlug(fullSlug) : null
   const content = post?.content || ''
 
   if (!post) {

@@ -15,8 +15,19 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/about" element={<About />} />
+              
+              {/* All collection routes */}
+              <Route path="/guides/:slug" element={<BlogPost />} />
+              <Route path="/case-studies/:slug" element={<BlogPost />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/features/:slug" element={<BlogPost />} />
+              <Route path="/compare/:slug" element={<BlogPost />} />
+              <Route path="/news/:slug" element={<BlogPost />} />
+              
+              {/* Legacy blog route for backward compatibility */}
+              <Route path="/posts/:slug" element={<BlogPost />} />
+              
               <Route path="/admin" element={<div className="p-8 text-center"><h1 className="text-2xl font-bold">TinaCMS Admin</h1><p className="mt-4">Run <code className="bg-gray-100 px-2 py-1 rounded">npm run tina</code> to access the CMS</p></div>} />
             </Routes>
           </AnimatePresence>
