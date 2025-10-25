@@ -104,7 +104,7 @@ export function Sidebar() {
   return (
     <>
       {/* Desktop Sidebar - Pinned to left with rounded right corners */}
-      <aside className="hidden lg:block sticky top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl float-left">
+      <aside className="hidden lg:block sticky top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl z-30 float-left">
         <SidebarContent />
       </aside>
 
