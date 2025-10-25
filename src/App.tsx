@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import BlogPost from './pages/BlogPost'
 import About from './pages/About'
+import CollectionPage from './pages/CollectionPage'
 
 function App() {
   return (
@@ -17,7 +18,15 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               
-              {/* All collection routes */}
+              {/* Collection category pages */}
+              <Route path="/guides" element={<CollectionPage />} />
+              <Route path="/case-studies" element={<CollectionPage />} />
+              <Route path="/blog" element={<CollectionPage />} />
+              <Route path="/features" element={<CollectionPage />} />
+              <Route path="/compare" element={<CollectionPage />} />
+              <Route path="/news" element={<CollectionPage />} />
+              
+              {/* Individual post routes */}
               <Route path="/guides/:slug" element={<BlogPost />} />
               <Route path="/case-studies/:slug" element={<BlogPost />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
