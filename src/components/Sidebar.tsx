@@ -118,10 +118,10 @@ export function Sidebar() {
           
           {/* Drawer */}
           <aside className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-900 text-white rounded-t-2xl shadow-2xl max-h-[80vh] overflow-y-auto animate-slide-up">
-            <div className="sticky top-0 bg-gray-900 border-b border-gray-800 p-4 flex justify-end items-center">
+            <div className="sticky top-0 bg-gray-900 border-b border-gray-800 py-2 px-4 flex justify-end items-center">
               <button
                 onClick={closeMobileMenu}
-                className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+                className="p-1.5 hover:bg-gray-800 rounded-full transition-colors"
                 aria-label="Close menu"
               >
                 <X className="h-5 w-5" />
