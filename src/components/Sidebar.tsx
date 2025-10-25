@@ -24,7 +24,6 @@ export function Sidebar() {
   
   const [expandedCollection, setExpandedCollection] = useState<string>(currentCollection)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
 
   // Lock scroll when mobile menu is open
   useEffect(() => {
@@ -37,44 +36,6 @@ export function Sidebar() {
       document.body.style.overflow = ''
     }
   }, [mobileMenuOpen])
-
-  // Handle scroll to show/hide sidebar based on position
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      
-      // Calculate hero image height (same as BlogPost)
-      // Mobile: h-64 (256px), sm: h-80 (320px), md: h-96 (384px)
-      const getHeroHeight = () => {
-        if (window.innerWidth >= 768) return 384 // md and up
-        if (window.innerWidth >= 640) return 320 // sm
-        return 256 // default
-      }
-      
-      const heroHeight = getHeroHeight()
-      const headerHeight = 64 // h-16
-      const heroEndPosition = heroHeight - headerHeight // Sidebar appears when hero passes header
-      
-      // Calculate footer position (approximate - article end)
-      const documentHeight = document.documentElement.scrollHeight
-      const windowHeight = window.innerHeight
-      const footerStartPosition = documentHeight - windowHeight - 300 // 300px before bottom
-      
-      // Show sidebar when past hero and before footer
-      setIsVisible(scrollY > heroEndPosition && scrollY < footerStartPosition)
-    }
-
-    // Initial check
-    handleScroll()
-    
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleScroll, { passive: true })
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleScroll)
-    }
-  }, [])
 
   const toggleCollection = (collection: string) => {
     setExpandedCollection(expandedCollection === collection ? '' : collection)
@@ -154,12 +115,8 @@ export function Sidebar() {
 
   return (
     <>
-      {/* Desktop Sidebar - Fixed with scroll-based visibility */}
-      <aside 
-        className={`hidden lg:block fixed top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl z-20 transition-opacity duration-300 ${
-          isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
+      {/* Desktop Sidebar - Pinned to left with rounded right corners */}
+      <aside className="hidden lg:block sticky top-16 left-0 w-64 h-[calc(100vh-4rem)] bg-gray-900 text-white overflow-y-auto border-r border-gray-800 rounded-r-2xl z-20 float-left">
         <SidebarContent />
       </aside>
 
