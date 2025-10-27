@@ -3,10 +3,12 @@ import { motion } from 'framer-motion'
 import { Calendar, Clock, ChevronLeft, Share2 } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 import { getPostBySlug } from '../lib/posts'
 import { Sidebar } from '../components/Sidebar'
 import { SEO } from '../components/SEO'
 import { ScrollCTA } from '../components/ScrollCTA'
+import { useEffect } from 'react'
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -26,6 +28,19 @@ const BlogPost = () => {
   
   // Smart back button: go to collection page only if user came from there, otherwise go home
   const backUrl = fromCollection ? `/${fromCollection}` : '/'
+
+  // Load Twitter widgets after content renders
+  useEffect(() => {
+    if ((window as any).twttr) {
+      (window as any).twttr.widgets.load()
+    } else {
+      const script = document.createElement('script')
+      script.src = 'https://platform.twitter.com/widgets.js'
+      script.async = true
+      script.charset = 'utf-8'
+      document.body.appendChild(script)
+    }
+  }, [content])
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -153,7 +168,10 @@ const BlogPost = () => {
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+            >
               {content}
             </ReactMarkdown>
           </div>

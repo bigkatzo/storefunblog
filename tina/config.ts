@@ -418,6 +418,21 @@ export default defineConfig({
             label: 'Body',
             description: 'The main content of your post',
             isBody: true,
+            templates: [
+              {
+                name: 'TweetEmbed',
+                label: 'Tweet Embed',
+                fields: [
+                  {
+                    name: 'tweetUrl',
+                    label: 'Tweet URL',
+                    type: 'string',
+                    required: true,
+                    description: 'Full tweet URL (e.g., https://twitter.com/username/status/123456789)',
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
