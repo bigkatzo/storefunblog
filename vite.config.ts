@@ -17,13 +17,5 @@ export default defineConfig({
       },
     },
   ],
-  build: {
-    commonjsOptions: {
-      include: [/react-syntax-highlighter/, /node_modules/],
-    },
-  },
-  optimizeDeps: {
-    include: ['react-syntax-highlighter'],
-  },
 })
 

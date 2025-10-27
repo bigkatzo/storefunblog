@@ -3,16 +3,10 @@ import { motion } from 'framer-motion'
 import { Calendar, Clock, ChevronLeft, Share2 } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import remarkBreaks from 'remark-breaks'
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeRaw from 'rehype-raw'
 import { getPostBySlug } from '../lib/posts'
 import { Sidebar } from '../components/Sidebar'
 import { SEO } from '../components/SEO'
 import { ScrollCTA } from '../components/ScrollCTA'
-import { ReadingProgress } from '../components/ReadingProgress'
-import { CodeBlock } from '../components/CodeBlock'
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -77,9 +71,6 @@ const BlogPost = () => {
         publishedTime={post.date}
         tags={post.tags}
       />
-      
-      {/* Reading Progress Bar */}
-      <ReadingProgress />
       
       {/* Scroll CTA Banner */}
       <ScrollCTA />
@@ -161,85 +152,8 @@ const BlogPost = () => {
           </div>
 
           {/* Article Content */}
-          <div className="prose prose-lg prose-gray max-w-none">
-            <ReactMarkdown 
-              remarkPlugins={[remarkGfm, remarkBreaks]}
-              rehypePlugins={[
-                rehypeRaw,
-                rehypeSlug,
-                [rehypeAutolinkHeadings, { behavior: 'wrap' }]
-              ]}
-              components={{
-                h1: ({node, ...props}) => <h1 className="text-4xl font-bold mt-10 mb-6 text-gray-900 leading-tight" {...props} />,
-                h2: ({node, ...props}) => <h2 className="text-3xl font-bold mt-8 mb-4 text-gray-900 leading-tight" {...props} />,
-                h3: ({node, ...props}) => <h3 className="text-2xl font-bold mt-6 mb-3 text-gray-900 leading-snug" {...props} />,
-                h4: ({node, ...props}) => <h4 className="text-xl font-bold mt-5 mb-2 text-gray-900 leading-snug" {...props} />,
-                h5: ({node, ...props}) => <h5 className="text-lg font-bold mt-4 mb-2 text-gray-900" {...props} />,
-                h6: ({node, ...props}) => <h6 className="text-base font-bold mt-3 mb-2 text-gray-900" {...props} />,
-                p: ({node, ...props}) => <p className="text-gray-700 leading-relaxed mb-6 text-lg" {...props} />,
-                ul: ({node, ...props}) => <ul className="list-disc list-outside ml-6 mb-6 space-y-2 text-gray-700" {...props} />,
-                ol: ({node, ...props}) => <ol className="list-decimal list-outside ml-6 mb-6 space-y-2 text-gray-700" {...props} />,
-                li: ({node, ...props}) => <li className="text-gray-700 leading-relaxed pl-2" {...props} />,
-                blockquote: ({node, ...props}) => (
-                  <blockquote className="border-l-4 border-gray-900 bg-gray-50 pl-6 pr-4 py-4 my-6 italic text-gray-700" {...props} />
-                ),
-                code: ({className, children}: any) => {
-                  const value = String(children).replace(/\n$/, '')
-                  const match = /language-(\w+)/.exec(className || '')
-                  const isInline = !match
-                  
-                  return (
-                    <CodeBlock 
-                      inline={isInline}
-                      className={className}
-                    >
-                      {value}
-                    </CodeBlock>
-                  )
-                },
-                pre: ({children}: any) => (
-                  <div>{children}</div>
-                ),
-                a: ({node, ...props}) => (
-                  <a className="text-gray-900 font-medium underline decoration-2 decoration-gray-300 hover:decoration-gray-900 transition-colors" {...props} />
-                ),
-                strong: ({node, ...props}) => <strong className="font-bold text-gray-900" {...props} />,
-                em: ({node, ...props}) => <em className="italic text-gray-700" {...props} />,
-                del: ({node, ...props}) => <del className="line-through text-gray-500" {...props} />,
-                hr: ({node, ...props}) => <hr className="my-8 border-t-2 border-gray-200" {...props} />,
-                table: ({node, ...props}) => (
-                  <div className="overflow-x-auto my-6">
-                    <table className="min-w-full border-collapse border border-gray-300" {...props} />
-                  </div>
-                ),
-                thead: ({node, ...props}) => <thead className="bg-gray-100" {...props} />,
-                tbody: ({node, ...props}) => <tbody className="divide-y divide-gray-200" {...props} />,
-                tr: ({node, ...props}) => <tr className="hover:bg-gray-50" {...props} />,
-                th: ({node, ...props}) => (
-                  <th className="px-6 py-3 text-left text-sm font-bold text-gray-900 border border-gray-300" {...props} />
-                ),
-                td: ({node, ...props}) => (
-                  <td className="px-6 py-3 text-sm text-gray-700 border border-gray-300" {...props} />
-                ),
-                img: ({node, ...props}: any) => (
-                  <img className="rounded-lg shadow-md my-6 w-full" loading="lazy" {...props} />
-                ),
-                // Task list support
-                input: ({node, ...props}: any) => {
-                  if (props.type === 'checkbox') {
-                    return (
-                      <input 
-                        type="checkbox"
-                        className="mr-2 h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
-                        disabled
-                        {...props}
-                      />
-                    )
-                  }
-                  return <input {...props} />
-                },
-              }}
-            >
+          <div className="prose prose-lg max-w-none">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {content}
             </ReactMarkdown>
           </div>
