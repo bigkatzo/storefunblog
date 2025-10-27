@@ -179,11 +179,6 @@
     @apply transition-all duration-200 ease-in-out;
   }
   
-  /* Enhanced code block scrolling */
-  .prose pre {
-    @apply scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800;
-  }
-  
   /* Better responsive typography for smaller screens */
   @media (max-width: 640px) {
     .prose {
