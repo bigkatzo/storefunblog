@@ -171,6 +171,7 @@ const BlogPost = () => {
             <ReactMarkdown 
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
+              skipHtml={false}
             >
               {content}
             </ReactMarkdown>
