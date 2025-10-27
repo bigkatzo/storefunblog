@@ -53,7 +53,9 @@ function parseFrontmatter(content: string) {
         data[key] = []
         inArray = true
       } else {
-        data[key] = value
+        // Remove surrounding quotes if present
+        const cleanValue = value.replace(/^['"](.*)['"]$/, '$1')
+        data[key] = cleanValue
         inArray = false
       }
     }

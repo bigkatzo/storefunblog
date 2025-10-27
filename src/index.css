@@ -18,6 +18,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-white text-gray-900 antialiased;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -152,6 +156,61 @@
   .prose ul ol,
   .prose ol ul {
     @apply mt-2 mb-2;
+  }
+  
+  /* Task list styling */
+  .prose input[type="checkbox"] {
+    @apply mr-2 h-4 w-4 rounded border-gray-300 text-gray-900;
+  }
+  
+  /* Anchor link hover effect for headings */
+  .prose h1 a,
+  .prose h2 a,
+  .prose h3 a,
+  .prose h4 a,
+  .prose h5 a,
+  .prose h6 a {
+    @apply text-gray-900 no-underline hover:underline decoration-gray-300;
+  }
+  
+  /* Smooth transitions for interactive elements */
+  .prose a,
+  .prose button {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  /* Enhanced code block scrolling */
+  .prose pre {
+    @apply scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800;
+  }
+  
+  /* Better responsive typography for smaller screens */
+  @media (max-width: 640px) {
+    .prose {
+      @apply text-base;
+    }
+    
+    .prose h1 {
+      @apply text-3xl;
+    }
+    
+    .prose h2 {
+      @apply text-2xl;
+    }
+    
+    .prose h3 {
+      @apply text-xl;
+    }
+    
+    .prose p {
+      @apply text-base;
+    }
+  }
+  
+  /* Focus visible for accessibility */
+  .prose a:focus-visible,
+  .prose button:focus-visible {
+    @apply outline-2 outline-offset-2 outline-gray-900 rounded;
   }
 }
 

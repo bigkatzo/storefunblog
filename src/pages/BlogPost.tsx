@@ -3,10 +3,16 @@ import { motion } from 'framer-motion'
 import { Calendar, Clock, ChevronLeft, Share2 } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import remarkBreaks from 'remark-breaks'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeRaw from 'rehype-raw'
 import { getPostBySlug } from '../lib/posts'
 import { Sidebar } from '../components/Sidebar'
 import { SEO } from '../components/SEO'
 import { ScrollCTA } from '../components/ScrollCTA'
+import { ReadingProgress } from '../components/ReadingProgress'
+import { CodeBlock } from '../components/CodeBlock'
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -71,6 +77,9 @@ const BlogPost = () => {
         publishedTime={post.date}
         tags={post.tags}
       />
+      
+      {/* Reading Progress Bar */}
+      <ReadingProgress />
       
       {/* Scroll CTA Banner */}
       <ScrollCTA />
@@ -154,7 +163,12 @@ const BlogPost = () => {
           {/* Article Content */}
           <div className="prose prose-lg prose-gray max-w-none">
             <ReactMarkdown 
-              remarkPlugins={[remarkGfm]}
+              remarkPlugins={[remarkGfm, remarkBreaks]}
+              rehypePlugins={[
+                rehypeRaw,
+                rehypeSlug,
+                [rehypeAutolinkHeadings, { behavior: 'wrap' }]
+              ]}
               components={{
                 h1: ({node, ...props}) => <h1 className="text-4xl font-bold mt-10 mb-6 text-gray-900 leading-tight" {...props} />,
                 h2: ({node, ...props}) => <h2 className="text-3xl font-bold mt-8 mb-4 text-gray-900 leading-tight" {...props} />,
@@ -169,20 +183,22 @@ const BlogPost = () => {
                 blockquote: ({node, ...props}) => (
                   <blockquote className="border-l-4 border-gray-900 bg-gray-50 pl-6 pr-4 py-4 my-6 italic text-gray-700" {...props} />
                 ),
-                code: ({node, className, children, ...props}) => {
-                  const inline = !className;
-                  return inline ? (
-                    <code className="bg-gray-100 text-gray-900 px-2 py-1 rounded text-sm font-mono" {...props}>
-                      {children}
-                    </code>
-                  ) : (
-                    <code className={className} {...props}>
-                      {children}
-                    </code>
-                  );
+                code: ({className, children}: any) => {
+                  const value = String(children).replace(/\n$/, '')
+                  const match = /language-(\w+)/.exec(className || '')
+                  const isInline = !match
+                  
+                  return (
+                    <CodeBlock 
+                      inline={isInline}
+                      className={className}
+                    >
+                      {value}
+                    </CodeBlock>
+                  )
                 },
-                pre: ({node, ...props}) => (
-                  <pre className="bg-gray-900 text-gray-100 p-6 rounded-xl overflow-x-auto my-6 shadow-lg" {...props} />
+                pre: ({children}: any) => (
+                  <div>{children}</div>
                 ),
                 a: ({node, ...props}) => (
                   <a className="text-gray-900 font-medium underline decoration-2 decoration-gray-300 hover:decoration-gray-900 transition-colors" {...props} />
@@ -205,9 +221,23 @@ const BlogPost = () => {
                 td: ({node, ...props}) => (
                   <td className="px-6 py-3 text-sm text-gray-700 border border-gray-300" {...props} />
                 ),
-                img: ({node, ...props}) => (
-                  <img className="rounded-lg shadow-md my-6 w-full" {...props} />
+                img: ({node, ...props}: any) => (
+                  <img className="rounded-lg shadow-md my-6 w-full" loading="lazy" {...props} />
                 ),
+                // Task list support
+                input: ({node, ...props}: any) => {
+                  if (props.type === 'checkbox') {
+                    return (
+                      <input 
+                        type="checkbox"
+                        className="mr-2 h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
+                        disabled
+                        {...props}
+                      />
+                    )
+                  }
+                  return <input {...props} />
+                },
               }}
             >
               {content}

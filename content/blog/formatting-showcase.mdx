@@ -1,0 +1,425 @@
+---
+title: Complete Typography & Formatting Showcase
+slug: formatting-showcase
+published: true
+excerpt: A comprehensive showcase of all advanced typography features including syntax highlighting, callouts, task lists, keyboard shortcuts, and beautiful markdown formatting!
+date: 2025-10-27T00:00:00.000Z
+readTime: 10 min read
+image: https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80
+imageAlt: Beautiful typography on a screen
+tags:
+  - Demo
+  - Typography
+  - Design
+  - Advanced
+category: tutorial
+author: StoreFun Team
+---
+
+# Heading Level 1
+
+This is a comprehensive showcase of all the **advanced typography and formatting features** available in our blog platform. From syntax-highlighted code blocks to beautiful callouts, task lists, and more!
+
+> **✨ New Features Added**
+> 
+> We've enhanced the blog with advanced typography features including syntax highlighting, beautiful styling, task lists, reading progress indicator, and much more!
+
+## Heading Level 2
+
+This heading has a subtle border underneath to create visual hierarchy and separate major sections.
+
+### Heading Level 3
+
+Perfect for subsections within your content.
+
+#### Heading Level 4
+
+Great for detailed breakdowns and nested topics.
+
+##### Heading Level 5
+
+Smaller but still bold and clear.
+
+###### Heading Level 6
+
+The smallest heading, styled with uppercase letters for distinction.
+
+---
+
+## Text Formatting
+
+Here's how different text styles look:
+
+This is **bold text** for emphasis. This is *italic text* for subtle emphasis. You can also combine them: ***bold and italic text***.
+
+Here's some ~~strikethrough text~~ for showing corrections or removed content.
+
+You can also use `inline code` for technical terms or code snippets within sentences.
+
+---
+
+## Lists
+
+### Unordered Lists (Bullet Points)
+
+Here's a simple bullet list:
+
+- First item in the list
+- Second item with more content
+- Third item
+  - Nested item level 1
+  - Another nested item
+    - Even deeper nesting
+- Back to top level
+
+### Ordered Lists (Numbered)
+
+Here's a numbered list:
+
+1. First step in the process
+2. Second step with detailed instructions
+3. Third step
+   1. Sub-step A
+   2. Sub-step B
+4. Final step
+
+### Mixed Lists
+
+You can even mix them:
+
+1. First numbered item
+   - Bullet point under number
+   - Another bullet point
+2. Second numbered item
+   - More bullet points
+     1. Numbered under bullet
+     2. Another numbered item
+
+---
+
+## Quotes
+
+> This is a blockquote. It's perfect for highlighting important information, customer testimonials, or notable quotes. The left border and background make it stand out beautifully from the rest of the content.
+
+> You can also have multiple paragraphs in quotes.
+>
+> Like this second paragraph here.
+
+---
+
+## Code Blocks with Syntax Highlighting
+
+Inline code looks like this: `const hello = "world"` with beautiful styling.
+
+> **💡 Copy Code Feature**
+> 
+> Hover over any code block to see a copy button appear in the top-right corner!
+
+### JavaScript / TypeScript
+
+```javascript
+function calculateDiscount(price, percentage) {
+  const discount = price * (percentage / 100);
+  const finalPrice = price - discount;
+  
+  console.log(`Original: $${price}`);
+  console.log(`Discount: ${percentage}%`);
+  console.log(`Final Price: $${finalPrice}`);
+  
+  return finalPrice;
+}
+
+// Example usage
+const salePrice = calculateDiscount(99.99, 25);
+```
+
+### Python
+
+```python
+def calculate_total(items):
+    """
+    Calculate the total price of items with tax.
+    
+    Args:
+        items (list): List of item dictionaries
+    
+    Returns:
+        float: Total price including tax
+    """
+    subtotal = sum(item['price'] for item in items)
+    tax = subtotal * 0.08
+    total = subtotal + tax
+    
+    return round(total, 2)
+
+# Example usage
+items = [
+    {'name': 'Product 1', 'price': 29.99},
+    {'name': 'Product 2', 'price': 49.99}
+]
+print(f"Total: ${calculate_total(items)}")
+```
+
+### React / JSX
+
+```jsx
+import { useState } from 'react';
+
+const ProductCard = ({ product }) => {
+  const [quantity, setQuantity] = useState(1);
+  
+  const handleAddToCart = () => {
+    console.log(`Adding ${quantity} ${product.name} to cart`);
+  };
+  
+  return (
+    <div className="product-card">
+      <img src={product.image} alt={product.name} />
+      <h3>{product.name}</h3>
+      <p>${product.price}</p>
+      <input 
+        type="number" 
+        value={quantity}
+        onChange={(e) => setQuantity(e.target.value)}
+      />
+      <button onClick={handleAddToCart}>
+        Add to Cart
+      </button>
+    </div>
+  );
+};
+```
+
+### CSS / SCSS
+
+```css
+.product-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-card h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+```
+
+### JSON
+
+```json
+{
+  "product": {
+    "id": "prod_123",
+    "name": "Premium Widget",
+    "price": 99.99,
+    "currency": "USD",
+    "inStock": true,
+    "categories": ["electronics", "gadgets"],
+    "metadata": {
+      "weight": "0.5kg",
+      "dimensions": "10x5x2cm"
+    }
+  }
+}
+```
+
+### SQL
+
+```sql
+SELECT 
+  p.product_name,
+  p.price,
+  c.category_name,
+  COUNT(o.order_id) as total_orders,
+  SUM(o.quantity) as total_sold
+FROM products p
+LEFT JOIN categories c ON p.category_id = c.id
+LEFT JOIN order_items o ON p.id = o.product_id
+WHERE p.price > 50
+GROUP BY p.id, p.product_name, p.price, c.category_name
+ORDER BY total_sold DESC
+LIMIT 10;
+```
+
+---
+
+## Links
+
+Here's a [link to Store.fun](https://store.fun) that's beautifully styled with an underline that animates on hover.
+
+You can also use [multiple links](https://store.fun/blog) in [the same paragraph](https://store.fun/features).
+
+---
+
+## Tables
+
+Here's a beautiful, responsive table:
+
+| Feature | Basic | Pro | Enterprise |
+|---------|-------|-----|------------|
+| Storage | 10 GB | 100 GB | Unlimited |
+| Users | 1 | 10 | Unlimited |
+| Support | Email | Priority | 24/7 Phone |
+| Price | $9/mo | $29/mo | Custom |
+
+---
+
+## Combinations
+
+You can combine all these elements naturally:
+
+### E-commerce Best Practices
+
+Here are the **top 3 things** you should focus on:
+
+1. **User Experience**
+   - Fast page loads
+   - Mobile responsiveness
+   - Intuitive navigation
+   
+2. **Product Presentation**
+   - *High-quality images*
+   - Detailed descriptions
+   - Customer reviews
+   
+3. **Trust & Security**
+   > "Trust is the foundation of e-commerce success" - Store.fun Team
+   
+   - SSL certificates
+   - Clear privacy policy
+   - Secure payment processing
+
+---
+
+## Enhanced Blockquotes
+
+Our blog supports beautiful blockquotes for highlighting important information! Use emojis and formatting to create different styles:
+
+> **📝 Note**
+> 
+> This is a note-style blockquote. Perfect for adding extra context or explanations to your content.
+
+> **ℹ️ Information**
+> 
+> Info-style blockquotes are great for sharing helpful tips or additional details that readers should know about.
+
+> **💡 Pro Tip**
+> 
+> Use tip-style blockquotes to share best practices, shortcuts, or expert advice with your readers!
+
+> **⚠️ Important Warning**
+> 
+> Warning-style blockquotes grab attention for critical information that users need to be aware of before proceeding.
+
+---
+
+## Task Lists
+
+Perfect for checklists, guides, and step-by-step instructions:
+
+- [x] Set up your store
+- [x] Add your first product
+- [x] Configure payment methods
+- [ ] Launch your marketing campaign
+- [ ] Analyze your first sales data
+- [ ] Scale your business
+
+---
+
+## Keyboard Shortcuts
+
+Show keyboard shortcuts with inline code styling:
+
+Press `Cmd` + `S` to save your work.
+
+Use `Ctrl` + `C` to copy and `Ctrl` + `V` to paste.
+
+Navigate with arrow keys: `←` `→` `↑` `↓`
+
+---
+
+## Image Example
+
+![Beautiful storefront](https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80)
+
+---
+
+## Advanced Features
+
+### Reading Progress Indicator
+
+Notice the thin progress bar at the top of the page? It shows how far you've scrolled through the article!
+
+### Smooth Scrolling
+
+All anchor links now have smooth scrolling enabled. Click any heading in a table of contents and enjoy the smooth transition!
+
+### Lazy Loading Images
+
+All images are now lazy-loaded for better performance, meaning they only load when you scroll near them.
+
+### Responsive Typography
+
+The typography automatically adjusts for different screen sizes - try resizing your browser window!
+
+---
+
+## Final Notes
+
+This showcase demonstrates **all the advanced typography and formatting options** available. Every element is:
+
+- ✅ **Beautifully styled** with modern design principles
+- ✅ **Syntax highlighted** for perfect code readability
+- ✅ **Interactive** with copy buttons and smooth animations
+- ✅ **Fully responsive** for all screen sizes
+- ✅ **Accessible** with semantic HTML and ARIA labels
+- ✅ **Performant** with lazy loading and optimizations
+
+> **🚀 Start Creating!**
+> 
+> Now you can create stunning blog posts with professional-grade formatting. Use blockquotes for emphasis, add syntax-highlighted code, create task lists, and more!
+
+### Technical Details
+
+For developers, here's the complete tech stack powering this beautiful formatting:
+
+```typescript
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeRaw from 'rehype-raw';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+// Full-featured markdown rendering
+<ReactMarkdown 
+  remarkPlugins={[remarkGfm, remarkBreaks]}
+  rehypePlugins={[
+    rehypeRaw,
+    rehypeSlug,
+    [rehypeAutolinkHeadings, { behavior: 'wrap' }]
+  ]}
+  components={{
+    code: CodeBlock, // With syntax highlighting + copy button
+    // ... and many more custom components for beautiful rendering
+  }}
+>
+  {content}
+</ReactMarkdown>
+```
+
+**Happy writing!** ✨
+
