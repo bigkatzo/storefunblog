@@ -77,7 +77,7 @@ const BlogPost = () => {
   return (
     <div className="min-h-screen">
       {/* SEO Meta Tags */}
-      <SEO {...generatePostSEO(post)} />
+      <SEO {...generatePostSEO(post, typeof window !== 'undefined' ? window.location.origin : undefined)} />
       
       {/* Scroll CTA Banner */}
       <ScrollCTA />

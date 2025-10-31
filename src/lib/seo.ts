@@ -14,7 +14,7 @@ export interface PostSEOData {
 /**
  * Generates consistent SEO metadata for blog posts
  * @param post - The blog post object
- * @param baseUrl - Optional base URL for canonical URLs
+ * @param baseUrl - Optional base URL for canonical URLs and images
  * @returns SEO metadata object
  */
 export function generatePostSEO(post: BlogPost, baseUrl?: string): PostSEOData {
@@ -24,10 +24,15 @@ export function generatePostSEO(post: BlogPost, baseUrl?: string): PostSEOData {
   // Generate canonical URL if base URL is available
   const url = base && post.slug ? `${base}/${post.slug}` : undefined
 
+  // Convert relative image paths to absolute URLs for social media
+  const image = post.image
+    ? (post.image.startsWith('http') ? post.image : `${base}${post.image}`)
+    : undefined
+
   return {
     title: post.title,
     description: post.excerpt,
-    image: post.image,
+    image: image || '',
     url,
     type: 'article' as const,
     author: post.author,
