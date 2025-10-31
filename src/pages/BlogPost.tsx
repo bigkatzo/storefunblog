@@ -21,9 +21,6 @@ const BlogPost = () => {
   // Build full slug with collection (e.g., "guides/my-post")
   const fullSlug = slug ? `${collection}/${slug}` : null
   const post = fullSlug ? getPostBySlug(fullSlug) : null
-
-  // Debug logging
-  console.log(`BlogPost: slug param=${slug}, collection=${collection}, fullSlug=${fullSlug}, post found=${!!post}`)
   const content = post?.content || ''
   
   // Check if user came from a collection page
