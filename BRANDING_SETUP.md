@@ -93,7 +93,7 @@ https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-ass
 ### Open Graph Tags
 ```html
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://blog.store.fun/" />
+<meta property="og:url" content="https://learn.store.fun/" />
 <meta property="og:title" content="Store.fun: Commerce App for Creators on Solana" />
 <meta property="og:description" content="..." />
 <meta property="og:image" content="[OG Image URL]" />
@@ -102,7 +102,7 @@ https://sakysysfksculqobozxi.supabase.co/storage/v1/render/image/public/site-ass
 ### Twitter Tags
 ```html
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://blog.store.fun/" />
+<meta property="twitter:url" content="https://learn.store.fun/" />
 <meta property="twitter:title" content="Store.fun: Commerce App for Creators on Solana" />
 <meta property="twitter:description" content="..." />
 <meta property="twitter:image" content="[Twitter Image URL]" />
