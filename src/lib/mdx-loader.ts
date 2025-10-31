@@ -86,9 +86,10 @@ export function loadPosts(): BlogPost[] {
     const pathParts = path.split('/')
     const filename = pathParts.pop()?.replace('.mdx', '') || ''
     const collection = pathParts[pathParts.length - 1] // e.g., "guides", "blog", "compare"
-    
-    // Create slug with collection path (e.g., "guides/my-post", "compare/product-comparison")
-    const slug = `${collection}/${filename}`
+
+    // Use slug from frontmatter if available, otherwise use filename
+    const slugFromFrontmatter = data.slug
+    const slug = slugFromFrontmatter ? `${collection}/${slugFromFrontmatter}` : `${collection}/${filename}`
     
     posts.push({
       title: data.title || 'Untitled',
