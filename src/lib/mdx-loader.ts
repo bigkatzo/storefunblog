@@ -98,7 +98,7 @@ export function loadPosts(): BlogPost[] {
       readTime: data.readTime || '5 min read',
       slug: slug,
       image: data.image || '',
-      tags: data.tags || [],
+      tags: Array.isArray(data.tags) ? data.tags : [],
       author: data.author || 'Anonymous',
       content: bodyContent.trim()
     })

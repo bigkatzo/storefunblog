@@ -118,7 +118,7 @@ const BlogPost = () => {
           transition={{ duration: 0.2 }}
         >
           {/* Tags */}
-          {post.tags && post.tags.length > 0 && (
+          {post.tags && Array.isArray(post.tags) && post.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {post.tags.map((tag: string, index: number) => (
                 <span
